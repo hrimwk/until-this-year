@@ -12,21 +12,10 @@ const colors = {
   luck_g: '#F4D8A2',
 
   border: '#EEEEEE',
-  text_title_bk: '#000000',
-  text_title_wh: '#FFFFFF',
-  text_body_900: '#212121',
-  text_body_700: '#616161',
-  text_system: '#9E9E9E',
-};
-const fonts = {
-  title: 'SANJUGotgam',
-  system: 'NanumSquareNeo-Variable',
-  talk: 'LeeSeoyun',
 };
 
 const theme: DefaultTheme = {
   colors,
-  fonts,
 };
 
 export default theme;
