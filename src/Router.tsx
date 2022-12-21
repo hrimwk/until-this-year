@@ -13,14 +13,15 @@ function App() {
   return (
     <BrowserRouter>
       <GlobalStyle />
-      <ThemeProvider theme={theme}></ThemeProvider>
-      <Routes>
-        <Route path="/" element={<Intro />}></Route>
-        <Route path="/user" element={<UserAuth />}></Route>
-        <Route path="/fortune" element={<FortuneList />}></Route>
-        <Route path="/write" element={<Write />}></Route>
-        <Route path="/result" element={<Result />}></Route>
-      </Routes>
+      <ThemeProvider theme={theme}>
+        <Routes>
+          <Route path='/' element={<Intro />} />
+          <Route path='/user' element={<UserAuth />} />
+          <Route path='/fortune' element={<FortuneList />} />
+          <Route path='/write' element={<Write />} />
+          <Route path='/result' element={<Result />} />
+        </Routes>
+      </ThemeProvider>
     </BrowserRouter>
   );
 }
