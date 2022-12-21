@@ -14,6 +14,8 @@ function ArrowBack() {
   );
 }
 const ArrowBackContainer = styled.div`
+  position: absolute;
+  top: 14px;
   width: 44px;
   height: 44px;
   padding: 10px;
