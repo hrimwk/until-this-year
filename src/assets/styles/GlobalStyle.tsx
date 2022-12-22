@@ -112,6 +112,13 @@ const GlobalStyle = createGlobalStyle`
         font-size: 10px;
         line-height: 16px;
     }
+    .btn-txt-eb{
+        font-family: 'NanumSquareNeo-Variable';
+        font-weight: 800;
+        font-size: 16px;
+        line-height: 24px;
+
+    }
 `;
 
 export default GlobalStyle;
