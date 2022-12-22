@@ -42,7 +42,6 @@ const GlobalStyle = createGlobalStyle`
         width:100%;
     }
     input{
-        display: flex;
         padding-left: 10px;
         border:1px solid #EEEEEE;
         border-radius: 4px;
@@ -69,6 +68,9 @@ const GlobalStyle = createGlobalStyle`
     }
     .c-gy-500{
         color:#9E9E9E;
+    }
+    .c-error-red{
+        color:#FF1C1C;
     }
     .title-1{
         font-family: 'SANJUGotgam';
@@ -117,6 +119,18 @@ const GlobalStyle = createGlobalStyle`
         font-weight: 800;
         font-size: 16px;
         line-height: 24px;
+
+    }
+    .btn-txt-16{
+        font-family: 'NanumSquareNeo-Variable';
+        font-size: 16px;
+        line-height: 24px;
+    }
+    .btn-txt-12{
+        font-family: 'NanumSquareNeo-Variable';
+        font-size: 12px;
+        line-height: 18px;
+        text-decoration: underline;
 
     }
 `;
