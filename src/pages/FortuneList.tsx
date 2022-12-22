@@ -1,15 +1,30 @@
 import styled from 'styled-components';
 import ArrowBack from '../components/common/ArrowBack';
 import fortune_love from '../assets/images/fortune_love.png';
+import React, { useState } from 'react';
+import Modal from '../components/common/Modal';
 
-function FotuneList() {
+type PropsType = {
+  fortune: string;
+  setfortune: (data: string) => void;
+};
+function FotuneList(props: PropsType) {
+  const { fortune, setfortune } = props;
+  const [visible, setVisible] = useState(false);
+  const [modalId, setModalId] = useState<string>('');
+
   const FORTUNE_LIST = [
-    { src: fortune_love, info: '연애/결혼', id: 1 },
-    { src: fortune_love, info: '재물/돈', id: 2 },
-    { src: fortune_love, info: '대인관계', id: 3 },
-    { src: fortune_love, info: '자아실현', id: 4 },
-    { src: fortune_love, info: '건강', id: 5 },
+    { src: fortune_love, info: '연애/결혼', id: 'love', alt: 'love' },
+    { src: fortune_love, info: '재물/돈', id: 'money', alt: 'money' },
+    { src: fortune_love, info: '대인관계', id: 'relationship', alt: 'relationship' },
+    { src: fortune_love, info: '자아실현', id: 'ego', alt: 'ego' },
+    { src: fortune_love, info: '건강', id: 'health', alt: 'health' },
   ];
+  const modalClick = (e: React.MouseEvent) => {
+    setVisible(true);
+    setModalId(e.currentTarget.id);
+  };
+
   return (
     <FortuneListContainer className='container'>
       <ArrowBack />
@@ -18,15 +33,16 @@ function FotuneList() {
         <div className='list-wrap'>
           {FORTUNE_LIST.map((data) => {
             return (
-              <div className='fortune' key={data.id}>
-                <img src={data.src} />
+              <div className='fortune' key={data.id} onClick={modalClick} id={data.id}>
+                <img src={data.src} alt={data.alt} />
                 <span />
-                <p className='fortune-info'>{data.info}</p>
+                <p className='fortune-info sub-title-1'>{data.info}</p>
               </div>
             );
           })}
         </div>
       </div>
+      <Modal visible={visible} setVisible={setVisible} modalId={modalId} setfortune={setfortune} />
     </FortuneListContainer>
   );
 }

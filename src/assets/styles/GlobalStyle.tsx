@@ -33,10 +33,10 @@ const GlobalStyle = createGlobalStyle`
         display: none;
     }
     button{
-        display: flex;
         cursor: pointer;
         outline: none;
         border-radius: 3px;
+        text-align: center;
     }
     img{
         width:100%;
@@ -79,6 +79,11 @@ const GlobalStyle = createGlobalStyle`
         font-family: 'SANJUGotgam';
         font-size: 18px;
         line-height: 28px;
+    }
+    .title-3{
+        font-family: 'SANJUGotgam';
+        font-size: 16px;
+        line-height: 24px;
     }
     .sub-title-1-eb{
         font-family: 'NanumSquareNeo-Variable';
