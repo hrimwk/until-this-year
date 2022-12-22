@@ -21,4 +21,5 @@ const Container = styled.div`
   align-items: center;
   background-color: ${({ theme }) => theme.colors.p_mid};
   transform: translate(-50%);
+  z-index: 999;
 `;
