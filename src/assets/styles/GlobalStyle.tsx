@@ -101,7 +101,7 @@ const GlobalStyle = createGlobalStyle`
     .sub-title-2{
         font-family: 'NanumSquareNeo-Variable';
         font-weight: 800;
-        font-size: 10x;
+        font-size: 10px;
         line-height: 16px;
     }
     .body-txt-1{
