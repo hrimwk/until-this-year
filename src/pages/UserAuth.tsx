@@ -1,10 +1,16 @@
+import axios from 'axios';
 import { useState, ChangeEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import ArrowBack from '../components/common/ArrowBack';
+import UserModal from '../components/user/UserModal';
 
 function UserAuth() {
   const [nameValue, setNameValue] = useState('');
   const [emailValue, setEmailValue] = useState('');
+  const [consentCheck, setConsentCheck] = useState(true);
+  const [modal, setModal] = useState(false);
+  const navigator = useNavigate();
 
   const writeName = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length > 8) {
@@ -18,20 +24,37 @@ function UserAuth() {
   const validEmail = (email: string) => {
     const emailFormat =
       /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-    return email === '' || emailFormat.test(email);
+    return emailFormat.test(email);
   };
 
-  const handleGoNextStep = () => {};
+  const handleChecked = () => setConsentCheck((prev) => !prev);
+
+  const handleGoNextStep = () => {
+    // axios
+    //   .get(`http://localhost:8000/?email=${emailValue}`)
+    //   .then((res) => {
+    //     if (!res) {
+    //       navigator('/fortune');
+    //     } else {
+    setModal(true);
+    //   }
+    // })
+    // .catch((err) => {
+    //   alert('에러가 발생했습니다. 잠시 후 다시 시도해주세요.');
+    //   console.log(err);
+    // });
+  };
 
   return (
     <UserAuthtContainer className='container'>
+      {modal && <UserModal setModal={setModal} />}
       <ArrowBack />
       <div className='content-container'>
         <h2 className='c-bk title-1 title'>올해까치</h2>
         <form className='form-container' onSubmit={(e) => e.preventDefault()}>
           <input
             type='text'
-            className='text-input'
+            className='text-input nickname-input'
             placeholder='닉네임 (8자까지)'
             value={nameValue}
             onChange={writeName}
@@ -39,19 +62,24 @@ function UserAuth() {
           />
           <input
             type='text'
-            className={validEmail(emailValue) ? 'text-input' : 'text-input border-red'}
+            className={emailValue.length == 0 || validEmail(emailValue) ? 'text-input' : 'text-input border-red'}
             placeholder='이메일'
             value={emailValue}
             onChange={writeEmail}
             required
           />
-          {!validEmail(emailValue) && <p className='body-txt-2'>이메일 형식이 맞지 않습니다.</p>}
+          {emailValue.length > 0 && !validEmail(emailValue) && (
+            <p className='body-txt-2'>이메일 형식이 맞지 않습니다.</p>
+          )}
         </form>
-        <div className='checkbox-container'>
+        <section className='checkbox-container'>
           <div className='checkbox-box'>
             <div className='checkbox'>
-              <input type='checkbox' />
-              <label htmlFor='checkbox' className='sub-title-1'>
+              <input id='checked' type='checkbox' defaultChecked checked={consentCheck} onClick={handleChecked} />
+              <span className={consentCheck ? 'fake-checkbox full' : 'fake-checkbox empty'} onClick={handleChecked}>
+                {consentCheck && <span className='checkImg' />}
+              </span>
+              <label htmlFor='checked' className='sub-title-1'>
                 6개월 뒤 메일 수신 동의하기
               </label>
             </div>
@@ -62,8 +90,8 @@ function UserAuth() {
             <br />
             알찬 일년을 다시 한번 다짐해보는 기회가 될거예요.
           </div>
-        </div>
-        <div className='terms-container'>
+        </section>
+        <section className='terms-container'>
           <ul className='terms-list'>
             <li className='term'>
               <p className='c-gy-500 sub-title-2'>개인정보의 보유 및 이용기간</p>
@@ -80,12 +108,14 @@ function UserAuth() {
               </p>
             </li>
           </ul>
-          <button
-            onClick={handleGoNextStep}
-            className={validEmail(emailValue) && nameValue ? 'btn active c-wt' : 'btn c-gy-500'}>
-            새해 복 받으러 가기
-          </button>
-        </div>
+          <section className='button-area'>
+            <button
+              className={validEmail(emailValue) && nameValue ? 'btn active btn-txt-eb c-wt' : 'btn btn-txt-eb c-gy-500'}
+              onClick={handleGoNextStep}>
+              새해 복 받으러 가기
+            </button>
+          </section>
+        </section>
       </div>
     </UserAuthtContainer>
   );
@@ -102,7 +132,7 @@ const UserAuthtContainer = styled.div`
     height: 100%;
 
     .title {
-      margin-top: 120px;
+      margin-top: 56px;
     }
 
     .form-container {
@@ -110,7 +140,9 @@ const UserAuthtContainer = styled.div`
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      width: 80%;
+      width: 100%;
+      max-width: 400px;
+      margin: 0 20px;
 
       .text-input {
         width: 100%;
@@ -119,6 +151,12 @@ const UserAuthtContainer = styled.div`
 
         &:last-of-type {
           margin-bottom: 8px;
+        }
+      }
+
+      .nickname-input {
+        &:focus {
+          border: 1px solid ${({ theme }) => theme.colors.p_light};
         }
       }
 
@@ -132,7 +170,12 @@ const UserAuthtContainer = styled.div`
         color: #ff1c1c;
       }
     }
+
     .checkbox-container {
+      width: 100%;
+      max-width: 410px;
+      margin: 0 18px;
+
       .checkbox-box {
         display: flex;
         flex-direction: column;
@@ -145,7 +188,29 @@ const UserAuthtContainer = styled.div`
           justify-content: center;
 
           input {
+            display: none;
+          }
+
+          .fake-checkbox {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
             margin-right: 9px;
+
+            .checkImg {
+              display: inline-block;
+              width: inherit;
+              height: inherit;
+              background: center/70% no-repeat url('../src/assets/images/check.png');
+            }
+          }
+
+          .full {
+            background-color: ${({ theme }) => theme.colors.p_light};
+          }
+
+          .empty {
+            border: 1px solid ${({ theme }) => theme.colors.border};
           }
         }
       }
@@ -180,6 +245,7 @@ const UserAuthtContainer = styled.div`
       justify-content: center;
       align-items: center;
       width: 100%;
+      margin: 0 4px 60px 4px;
       text-align: center;
 
       .terms-list {
@@ -191,20 +257,33 @@ const UserAuthtContainer = styled.div`
           }
         }
       }
+    }
+  }
+  .button-area {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    max-width: 540px;
+    padding: 20px;
+    background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 1) 88%,
+      rgba(255, 255, 255, 0.6) 100%
+    );
 
-      .btn {
-        display: block;
-        width: 90%;
-        padding: 18px 38px;
-        background: #f5f5f5;
-        border: none;
-        border-radius: 6px;
-        font-size: 16px;
-      }
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 18px 38px;
+      background: #f5f5f5;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+    }
 
-      .active {
-        background-color: ${({ theme }) => theme.colors.p_dark};
-      }
+    .active {
+      background-color: ${({ theme }) => theme.colors.p_dark};
     }
   }
 `;
