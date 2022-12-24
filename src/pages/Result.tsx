@@ -45,9 +45,6 @@ const ResultContainer = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: 335px;
-  max-height: 480px;
-  overflow: scroll;
 
   .desc {
     margin-bottom: 8px;
@@ -55,6 +52,8 @@ const ResultContainer = styled.div`
 
   .goal-container {
     width: 100%;
+    max-width: 335px;
+    max-height: 480px;
     margin-bottom: 16px;
     padding: 56px 40px 30px 40px;
     border: 1px solid ${({ theme }) => theme.colors.border};
@@ -76,6 +75,8 @@ const ResultContainer = styled.div`
 
   .sns-container {
     width: 100%;
+    max-width: 335px;
+
     margin-bottom: 23px;
     text-align: center;
 
