@@ -5,21 +5,26 @@ import styled from 'styled-components';
 import ArrowBack from '../components/common/ArrowBack';
 import UserModal from '../components/user/UserModal';
 
-function UserAuth() {
-  const [nameValue, setNameValue] = useState('');
-  const [emailValue, setEmailValue] = useState('');
+interface UserAuthProps {
+  name: string;
+  setName: React.Dispatch<React.SetStateAction<string>>;
+  email: string;
+  setEmail: React.Dispatch<React.SetStateAction<string>>;
+}
+
+function UserAuth({ name, setName, email, setEmail }: UserAuthProps) {
   const [consentCheck, setConsentCheck] = useState(true);
   const [modal, setModal] = useState(false);
   const navigator = useNavigate();
 
   const writeName = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length > 8) {
-      setNameValue((prev) => prev);
+      setName((prev) => prev);
       return;
     }
-    setNameValue(e.target.value);
+    setName(e.target.value);
   };
-  const writeEmail = (e: ChangeEvent<HTMLInputElement>) => setEmailValue(e.target.value);
+  const writeEmail = (e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value);
 
   const validEmail = (email: string) => {
     const emailFormat =
@@ -31,7 +36,7 @@ function UserAuth() {
 
   const handleGoNextStep = () => {
     // axios
-    //   .get(`http://localhost:8000/?email=${emailValue}`)
+    //   .get(`http://localhost:8000/?email=${email}`)
     //   .then((res) => {
     //     if (!res) {
     //       navigator('/fortune');
@@ -56,26 +61,24 @@ function UserAuth() {
             type='text'
             className='text-input nickname-input'
             placeholder='닉네임 (8자까지)'
-            value={nameValue}
+            value={name}
             onChange={writeName}
             required
           />
           <input
             type='text'
-            className={emailValue.length == 0 || validEmail(emailValue) ? 'text-input' : 'text-input border-red'}
+            className={email.length == 0 || validEmail(email) ? 'text-input' : 'text-input border-red'}
             placeholder='이메일'
-            value={emailValue}
+            value={email}
             onChange={writeEmail}
             required
           />
-          {emailValue.length > 0 && !validEmail(emailValue) && (
-            <p className='body-txt-2'>이메일 형식이 맞지 않습니다.</p>
-          )}
+          {email.length > 0 && !validEmail(email) && <p className='body-txt-2'>이메일 형식이 맞지 않습니다.</p>}
         </form>
         <section className='checkbox-container'>
           <div className='checkbox-box'>
             <div className='checkbox'>
-              <input id='checked' type='checkbox' defaultChecked checked={consentCheck} onClick={handleChecked} />
+              <input id='checked' type='checkbox' readOnly checked={consentCheck} onClick={handleChecked} />
               <span className={consentCheck ? 'fake-checkbox full' : 'fake-checkbox empty'} onClick={handleChecked}>
                 {consentCheck && <span className='checkImg' />}
               </span>
@@ -110,7 +113,7 @@ function UserAuth() {
           </ul>
           <section className='button-area'>
             <button
-              className={validEmail(emailValue) && nameValue ? 'btn active btn-txt-eb c-wt' : 'btn btn-txt-eb c-gy-500'}
+              className={validEmail(email) && name ? 'btn active btn-txt-eb c-wt' : 'btn btn-txt-eb c-gy-500'}
               onClick={handleGoNextStep}>
               새해 복 받으러 가기
             </button>

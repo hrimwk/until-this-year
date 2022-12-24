@@ -10,18 +10,23 @@ import Write from './pages/Write';
 import Result from './pages/Result';
 import { useState } from 'react';
 
+type goal = { id: number; content: string };
+
 function App() {
+  const [name, setName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
   const [fortune, setfortune] = useState<string>('');
+  const [goalList, setGoalList] = useState<goal[]>([{ id: 1, content: '' }]);
   return (
     <BrowserRouter>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
         <Routes>
           <Route path='/' element={<Intro />} />
-          <Route path='/user' element={<UserAuth />} />
+          <Route path='/user' element={<UserAuth name={name} setName={setName} email={email} setEmail={setEmail} />} />
           <Route path='/fortune' element={<FortuneList fortune={fortune} setfortune={setfortune} />} />
           <Route path='/write' element={<Write />} />
-          <Route path='/result' element={<Result />} />
+          <Route path='/result' element={<Result name={name} goalList={goalList} />} />
         </Routes>
       </ThemeProvider>
     </BrowserRouter>
