@@ -9,7 +9,7 @@ function Intro() {
   const [splash, setSplash] = useState(true);
   const navigate = useNavigate();
 
-  setTimeout(() => setSplash(false), 1000);
+  setTimeout(() => setSplash(false), 1500);
 
   const clickButton = () => {
     navigate('/user');
