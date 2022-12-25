@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import ResultModal from '../components/result/ResultModal';
 
 interface ResultProps {
   name: string;
@@ -11,14 +12,18 @@ function Result({ name, goalList }: ResultProps) {
     <ResultContainer className='container'>
       <p className='sub-title-1 c-gy-500 desc'>카드를 뒤집어보세요!</p>
       <section className='goal-container'>
-        <h2 className='sub-title-1-eb c-bk title'>{name}님의 올해 목표</h2>
-        <ul>
-          {goalList?.map((goal) => (
-            <li className='body-txt-1 c-gy-900 goal' key={goal.id}>
-              {goal.content}
-            </li>
-          ))}
-        </ul>
+        <div className='ratio-container'>
+          <div className='absolute-container'>
+            <h2 className='sub-title-1-eb c-bk title'>{name}님의 올해 목표</h2>
+            <ul>
+              {goalList?.map((goal) => (
+                <li className='body-txt-1 c-gy-900 goal' key={goal.id}>
+                  {goal.content}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </section>
       <section className='sns-container'>
         <ul className='btn-box'>
@@ -55,20 +60,59 @@ const ResultContainer = styled.div`
     max-width: 335px;
     max-height: 480px;
     margin-bottom: 16px;
-    padding: 56px 40px 30px 40px;
-    border: 1px solid ${({ theme }) => theme.colors.border};
 
-    .title {
-      margin-bottom: 28px;
-      text-align: center;
-    }
+    .ratio-container {
+      position: relative;
+      width: 100%;
+      padding-top: 143%;
 
-    .goal {
-      padding: 20px 0;
-      border-bottom: 1px solid ${({ theme }) => theme.colors.border};
+      .absolute-container {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        padding: 56px 40px 30px 40px;
+        border: 1px solid ${({ theme }) => theme.colors.border};
 
-      &:last-child {
-        border-bottom: none;
+        @media screen and (min-width: 315px) and (max-width: 370px) {
+          padding: 44.8px 32px 24px 32px;
+        }
+
+        @media screen and (max-width: 315px) {
+          padding: 28px 20px 15px 20px;
+        }
+
+        .title {
+          margin-bottom: 28px;
+          text-align: center;
+
+          @media screen and (min-width: 315px) and (max-width: 370px) {
+            margin-bottom: 22.4px;
+          }
+
+          @media screen and (max-width: 315px) {
+            margin-bottom: 14px;
+          }
+        }
+
+        .goal {
+          padding: 20px 0;
+          border-bottom: 1px solid ${({ theme }) => theme.colors.border};
+
+          @media screen and (min-width: 300px) and (max-width: 370px) {
+            padding: 16px 0;
+          }
+
+          @media screen and (max-width: 300px) {
+            padding: 10px 0;
+            font-size: 10px;
+          }
+
+          &:last-child {
+            border-bottom: none;
+          }
+        }
       }
     }
   }
