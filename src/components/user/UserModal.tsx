@@ -38,7 +38,8 @@ const UserModal = ({ setModal }: UserModalProps) => {
 export default UserModal;
 
 const UserModalContainer = styled.div`
-  position: absolute;
+  position: fixed;
+  top: 0;
   left: 50%;
   min-height: 100vh;
   width: 100%;

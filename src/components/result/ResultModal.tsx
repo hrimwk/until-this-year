@@ -16,7 +16,7 @@ const ResultModal = ({ type }: { type: 'copy' | 'save' }) => {
 export default ResultModal;
 
 const ResultModalContainer = styled.div`
-  position: absolute;
+  position: fixed;
   width: 100%;
   max-width: 300px;
   padding: 16px 48px;
