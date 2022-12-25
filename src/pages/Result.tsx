@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import Share from '../components/result/Share';
 
 interface ResultProps {
   name: string;
@@ -25,13 +26,7 @@ function Result({ name, goalList }: ResultProps) {
         </div>
       </section>
       <section className='sns-container'>
-        <ul className='btn-box'>
-          <li className='sns-btn'>1</li>
-          <li className='sns-btn'>2</li>
-          <li className='sns-btn'>3</li>
-          <li className='sns-btn'>4</li>
-          <li className='sns-btn'>5</li>
-        </ul>
+        <Share />
         <p className='body-txt-2 c-gy-500'>
           이메일은 <b className='sub-title-2'>2023년 6월 30일</b>에 보내드려요
         </p>
