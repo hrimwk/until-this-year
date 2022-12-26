@@ -48,18 +48,18 @@ function FotuneList(props: PropsType) {
 }
 const FortuneListContainer = styled.div`
   .title-2 {
-    margin-top: 64px;
+    margin-top: 56px;
     text-align: center;
   }
   .list-wrap {
     display: flex;
     flex-wrap: wrap;
-    margin-top: 56px;
+    margin-top: 42px;
     width: 100%;
   }
   .fortune {
     padding: 0 20px;
-    margin-bottom: 32px;
+    margin-bottom: 28px;
     width: 50%;
     text-align: center;
     span {
