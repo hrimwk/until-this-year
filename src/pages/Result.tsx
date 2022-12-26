@@ -1,5 +1,7 @@
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { toPng } from 'html-to-image';
 import styled from 'styled-components';
 import usePreventLeave from '../assets/utils/result/usePreventLeave';
 import Share from '../components/result/Share';
@@ -10,16 +12,45 @@ interface ResultProps {
 }
 
 function Result({ name, goalList }: ResultProps) {
+  const { enablePrevent, disablePrevent } = usePreventLeave();
+  const cardRef = useRef<HTMLElement>(null);
+  const [imgUrl, setImgUrl] = useState<string>();
+
+  const downloadImg = () => {
+    if (cardRef.current === null) return;
+    toPng(cardRef.current, { cacheBust: true })
+      .then((dataUrl) => {
+        const link = document.createElement('a');
+        link.download = '2023MYGOALS_올해까치.png';
+        link.href = dataUrl;
+        link.click();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
     enablePrevent();
 
     return () => disablePrevent();
   }, []);
-  const { enablePrevent, disablePrevent } = usePreventLeave();
+
+  useEffect(() => {
+    if (cardRef.current === null) return;
+    toPng(cardRef.current, { cacheBust: true })
+      .then((dataUrl) => {
+        console.log(dataUrl);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [cardRef]);
+
   return (
     <ResultContainer className='container'>
       <p className='sub-title-1 c-gy-500 desc'>카드를 뒤집어보세요!</p>
-      <section className='goal-container'>
+      <section className='goal-container' ref={cardRef}>
         <div className='ratio-container'>
           <div className='absolute-container'>
             <h2 className='sub-title-1-eb c-bk title'>{name}님의 올해 목표</h2>
@@ -34,7 +65,7 @@ function Result({ name, goalList }: ResultProps) {
         </div>
       </section>
       <section className='sns-container'>
-        <Share />
+        <Share downloadImg={downloadImg} />
         <p className='body-txt-2 c-gy-500'>
           이메일은 <b className='sub-title-2'>2023년 6월 30일</b>에 보내드려요
         </p>
@@ -62,6 +93,7 @@ const ResultContainer = styled.div`
     max-width: 335px;
     max-height: 480px;
     margin-bottom: 16px;
+    background-color: #fff;
 
     .ratio-container {
       position: relative;
