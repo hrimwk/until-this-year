@@ -47,6 +47,10 @@ const GlobalStyle = createGlobalStyle`
         border-radius: 4px;
         outline: none;
     }
+    input::placeholder,
+    textarea::placeholder {
+      color:#9E9E9E;
+    }
     .container{
         margin: 0 auto;
         padding: 24px 20px;
