@@ -16,7 +16,6 @@ function App() {
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [consentCheck, setConsentCheck] = useState(true);
-  const [fortune, setfortune] = useState<string>('');
   const [goalList, setGoalList] = useState<goal[]>([{ id: 1, content: '', focus: false }]);
   return (
     <BrowserRouter>
@@ -37,14 +36,13 @@ function App() {
               />
             }
           />
-          <Route path='/fortune' element={<FortuneList fortune={fortune} setfortune={setfortune} />} />
+          <Route path='/fortune' element={<FortuneList />} />
           <Route
             path='/write'
             element={
               <Write
                 name={name}
                 email={email}
-                fortune={fortune}
                 goalList={goalList}
                 setGoalList={setGoalList}
                 consentCheck={consentCheck}

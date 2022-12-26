@@ -8,11 +8,10 @@ type propsType = {
   visible: boolean;
   setVisible: (data: boolean) => void;
   modalId: string;
-  setfortune: (data: string) => void;
 };
 
 function Modal(props: propsType) {
-  const { visible, setVisible, modalId, setfortune } = props;
+  const { visible, setVisible, modalId } = props;
   const navigate = useNavigate();
   const node = useRef<HTMLDivElement>(null);
 
@@ -20,7 +19,7 @@ function Modal(props: propsType) {
     setVisible(false);
   };
   const clickButton = () => {
-    setfortune(modalId);
+    sessionStorage.setItem('fortune-type', modalId);
     navigate('/write');
   };
 
