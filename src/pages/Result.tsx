@@ -17,6 +17,7 @@ function Result({ name, email, goalList }: ResultProps) {
   const cardRef = useRef<HTMLElement>(null);
   const navigator = useNavigate();
   const [imgUrl, setImgUrl] = useState<string>();
+  const [flip, setFlip] = useState(false);
 
   const downloadImg = () => {
     if (cardRef.current === null) return;
@@ -74,11 +75,13 @@ function Result({ name, email, goalList }: ResultProps) {
     }
   }, [imgUrl]);
 
+  const handleCardFlip = () => setFlip((prev) => !prev);
+
   return (
     <ResultContainer className='container'>
       <p className='sub-title-1 c-gy-500 desc'>카드를 뒤집어보세요!</p>
       <section className='goal-container' ref={cardRef}>
-        <div className='ratio-container'>
+        <FilpContainer className='ratio-container' onClick={handleCardFlip} $flip={flip}>
           <div className='absolute-container'>
             <h2 className='sub-title-1-eb c-bk title'>{name}님의 올해 목표</h2>
             <ul>
@@ -89,7 +92,8 @@ function Result({ name, email, goalList }: ResultProps) {
               ))}
             </ul>
           </div>
-        </div>
+          <div className='illust-container'></div>
+        </FilpContainer>
       </section>
       <section className='sns-container'>
         <Share downloadImg={downloadImg} />
@@ -104,6 +108,11 @@ function Result({ name, email, goalList }: ResultProps) {
     </ResultContainer>
   );
 }
+
+const FilpContainer = styled.div`
+  transform: ${({ $flip }: { $flip: boolean }) => ($flip ? 'rotateY(180deg)' : 'rotateY(0deg)')};
+`;
+
 const ResultContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -120,12 +129,27 @@ const ResultContainer = styled.div`
     max-width: 335px;
     max-height: 480px;
     margin-bottom: 16px;
-    background-color: #fff;
+    perspective: 1000px;
 
-    .ratio-container {
+    ${FilpContainer} {
       position: relative;
       width: 100%;
       padding-top: 143%;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+      cursor: pointer;
+
+      .illust-container {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        border: 1px solid ${({ theme }) => theme.colors.border};
+        background-color: #fff;
+        backface-visibility: hidden;
+        transform: rotateY(180deg);
+      }
 
       .absolute-container {
         position: absolute;
@@ -135,6 +159,8 @@ const ResultContainer = styled.div`
         height: 100%;
         padding: 56px 40px 30px 40px;
         border: 1px solid ${({ theme }) => theme.colors.border};
+        background-color: #fff;
+        backface-visibility: hidden;
 
         @media screen and (min-width: 315px) and (max-width: 370px) {
           padding: 44.8px 32px 24px 32px;
