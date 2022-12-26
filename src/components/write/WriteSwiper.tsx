@@ -55,8 +55,8 @@ const WriteSwiper = ({ fortune }: { fortune: string }) => {
     <Swiper modules={[Pagination]} pagination={true} loop={true}>
       {sentencesOfKkachi[getStrings(fortune)].map((strings) => (
         <SwiperSlide key={strings}>
-          <h5 className='sub-title-2'>까치의한마디</h5>
-          <li className='body-txt-1'>{strings}</li>
+          <h5 className='sub-title-2'>까치의 한마디</h5>
+          <p className='body-txt-1'>{strings}</p>
         </SwiperSlide>
       ))}
     </Swiper>

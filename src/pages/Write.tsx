@@ -13,9 +13,10 @@ interface WriteProps {
   fortune: string;
   goalList: goalList;
   setGoalList: React.Dispatch<React.SetStateAction<goalList>>;
+  consentCheck: boolean;
 }
 
-function Write({ name, email, fortune, goalList, setGoalList }: WriteProps) {
+function Write({ name, email, fortune, goalList, setGoalList, consentCheck }: WriteProps) {
   const [unqId, setUnqId] = useState(2);
   const navigator = useNavigate();
 
@@ -72,16 +73,15 @@ function Write({ name, email, fortune, goalList, setGoalList }: WriteProps) {
 
   const handleSubmit = () => {
     // axios
-    //   .post('url', {
-    //     name,
+    //   .post('http://localhost:8080/users/registration', {
+    //     nickname: name,
     //     email,
-    //     fortune,
+    //     opt_in: consentCheck,
     //     goals: goalList.filter((goal) => !!goal.content).map((goalObj) => goalObj.content),
     //   })
     //   .then((res) => {
-    //     console.log(res);
     setGoalList((prev) => [...prev].filter((goal) => !!goal.content));
-    navigator('/result');
+    //   navigator('/result');
     // })
     // .catch((err) => {
     //   console.log(err);
