@@ -1,5 +1,7 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import usePreventLeave from '../assets/utils/result/usePreventLeave';
 import Share from '../components/result/Share';
 
 interface ResultProps {
@@ -8,6 +10,12 @@ interface ResultProps {
 }
 
 function Result({ name, goalList }: ResultProps) {
+  useEffect(() => {
+    enablePrevent();
+
+    return () => disablePrevent();
+  }, []);
+  const { enablePrevent, disablePrevent } = usePreventLeave();
   return (
     <ResultContainer className='container'>
       <p className='sub-title-1 c-gy-500 desc'>카드를 뒤집어보세요!</p>
