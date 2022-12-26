@@ -103,6 +103,7 @@ const IntroContainer = styled.div`
       width: 100%;
       border: none;
       color: #fff;
+      border-radius: 6px;
       background: ${(props) => props.theme.colors.p_dark};
     }
   }
