@@ -10,13 +10,13 @@ import Write from './pages/Write';
 import Result from './pages/Result';
 import { useState } from 'react';
 
-type goal = { id: number; content: string };
+type goal = { id: number; content: string; focus: boolean };
 
 function App() {
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [fortune, setfortune] = useState<string>('');
-  const [goalList, setGoalList] = useState<goal[]>([{ id: 1, content: '' }]);
+  const [goalList, setGoalList] = useState<goal[]>([{ id: 1, content: '', focus: false }]);
   return (
     <BrowserRouter>
       <GlobalStyle />

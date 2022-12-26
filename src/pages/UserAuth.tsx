@@ -82,7 +82,7 @@ function UserAuth({ name, setName, email, setEmail }: UserAuthProps) {
               <span className={consentCheck ? 'fake-checkbox full' : 'fake-checkbox empty'} onClick={handleChecked}>
                 {consentCheck && <span className='checkImg' />}
               </span>
-              <label htmlFor='checked' className='sub-title-1'>
+              <label htmlFor='checked' className='sub-title-1 check-label'>
                 6개월 뒤 메일 수신 동의하기
               </label>
             </div>
@@ -114,7 +114,8 @@ function UserAuth({ name, setName, email, setEmail }: UserAuthProps) {
           <section className='button-area'>
             <button
               className={validEmail(email) && name ? 'btn active btn-txt-eb c-wt' : 'btn btn-txt-eb c-gy-500'}
-              onClick={handleGoNextStep}>
+              onClick={handleGoNextStep}
+              disabled={!!name && validEmail(email) ? false : true}>
               새해 복 받으러 가기
             </button>
           </section>
@@ -151,6 +152,7 @@ const UserAuthtContainer = styled.div`
         width: 100%;
         margin-bottom: 24px;
         padding: 14px 20px;
+        transition: 0.2s;
 
         &:last-of-type {
           margin-bottom: 8px;
@@ -158,6 +160,7 @@ const UserAuthtContainer = styled.div`
       }
 
       .nickname-input {
+        transition: 0.2s;
         &:focus {
           border: 1px solid ${({ theme }) => theme.colors.p_light};
         }
@@ -214,6 +217,10 @@ const UserAuthtContainer = styled.div`
 
           .empty {
             border: 1px solid ${({ theme }) => theme.colors.border};
+          }
+
+          .check-label {
+            margin-bottom: 8px;
           }
         }
       }
@@ -283,10 +290,17 @@ const UserAuthtContainer = styled.div`
       border: none;
       border-radius: 6px;
       font-size: 16px;
+      transition: 0.2s;
+      cursor: not-allowed;
     }
 
     .active {
       background-color: ${({ theme }) => theme.colors.p_dark};
+      cursor: pointer;
+
+      &:active {
+        background-color: ${({ theme }) => theme.colors.p_light};
+      }
     }
   }
 `;
