@@ -259,7 +259,6 @@ const UserAuthtContainer = styled.div`
       align-items: center;
       width: 100%;
       margin: 0 4px 60px 4px;
-      text-align: center;
 
       .terms-list {
         margin-bottom: 24px;
