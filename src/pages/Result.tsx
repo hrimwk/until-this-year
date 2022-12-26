@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import { toPng } from 'html-to-image';
 import styled from 'styled-components';
 import usePreventLeave from '../assets/utils/result/usePreventLeave';
@@ -14,6 +14,7 @@ interface ResultProps {
 function Result({ name, goalList }: ResultProps) {
   const { enablePrevent, disablePrevent } = usePreventLeave();
   const cardRef = useRef<HTMLElement>(null);
+  const navigator = useNavigate();
   const [imgUrl, setImgUrl] = useState<string>();
 
   const downloadImg = () => {
@@ -28,6 +29,11 @@ function Result({ name, goalList }: ResultProps) {
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  const goMain = () => {
+    navigator('/');
+    location.reload();
   };
 
   useEffect(() => {
@@ -71,9 +77,9 @@ function Result({ name, goalList }: ResultProps) {
         </p>
         <p className='body-txt-2 c-gy-500'>버그제보/문의 email@email.com</p>
       </section>
-      <Link to='/' className='btn-txt-12 c-bk link'>
+      <p className='btn-txt-12 c-bk link' onClick={goMain}>
         처음으로 돌아가기
-      </Link>
+      </p>
     </ResultContainer>
   );
 }
@@ -180,6 +186,7 @@ const ResultContainer = styled.div`
 
   .link {
     padding: 14px 24px;
+    cursor: pointer;
 
     &:active {
       color: ${({ theme }) => theme.colors.p_mid};
