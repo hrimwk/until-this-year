@@ -49,7 +49,7 @@ function App() {
               />
             }
           />
-          <Route path='/result' element={<Result name={name} goalList={goalList} />} />
+          <Route path='/result' element={<Result name={name} email={email} goalList={goalList} />} />
         </Routes>
       </ThemeProvider>
     </BrowserRouter>

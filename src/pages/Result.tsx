@@ -8,10 +8,11 @@ import Share from '../components/result/Share';
 
 interface ResultProps {
   name: string;
+  email: string;
   goalList: { id: number; content: string }[];
 }
 
-function Result({ name, goalList }: ResultProps) {
+function Result({ name, email, goalList }: ResultProps) {
   const { enablePrevent, disablePrevent } = usePreventLeave();
   const cardRef = useRef<HTMLElement>(null);
   const navigator = useNavigate();
@@ -46,12 +47,32 @@ function Result({ name, goalList }: ResultProps) {
     if (cardRef.current === null) return;
     toPng(cardRef.current, { cacheBust: true })
       .then((dataUrl) => {
-        console.log(dataUrl);
+        const formData = new FormData();
+        formData.append('file', dataUrl);
+        formData.append('upload_preset', import.meta.env.VITE_CLOUDINARY_PRESET);
+        formData.append('folder', 'kkachi');
+        fetch(import.meta.env.VITE_CLOUDINARY_URL, {
+          method: 'POST',
+          body: formData,
+        })
+          .then((res) => res.json())
+          .then((res) => {
+            setImgUrl(res.url);
+          });
       })
       .catch((err) => {
         console.log(err);
       });
   }, [cardRef]);
+
+  useEffect(() => {
+    if (imgUrl) {
+      axios
+        .post('url', { email, image: imgUrl })
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+    }
+  }, [imgUrl]);
 
   return (
     <ResultContainer className='container'>
