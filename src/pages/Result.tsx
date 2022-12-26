@@ -141,6 +141,10 @@ const ResultContainer = styled.div`
   .link {
     padding: 14px 24px;
 
+    &:active {
+      color: ${({ theme }) => theme.colors.p_mid};
+    }
+
     @media screen and (max-height: 715px) {
       padding: 5px 24px;
     }

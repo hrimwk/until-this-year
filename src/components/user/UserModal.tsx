@@ -79,6 +79,10 @@ const UserModalContainer = styled.div`
       &:first-of-type {
         margin-right: 16px;
       }
+
+      &:active {
+        background-color: ${({ theme }) => theme.colors.p_light};
+      }
     }
   }
 `;

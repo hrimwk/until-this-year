@@ -5,7 +5,7 @@ import styled, { DefaultTheme } from 'styled-components';
 import ArrowBack from '../components/common/ArrowBack';
 import WriteSwiper from '../components/write/WriteSwiper';
 
-type goalList = { id: number; content: string }[];
+type goalList = { id: number; content: string; focus: boolean }[];
 
 interface WriteProps {
   name: string;
@@ -21,7 +21,7 @@ function Write({ name, email, fortune, goalList, setGoalList }: WriteProps) {
 
   const handleAddGoalList = () => {
     if (goalList.length >= 5) return;
-    setGoalList((prev) => [...prev, { id: unqId, content: '' }]);
+    setGoalList((prev) => [...prev, { id: unqId, content: '', focus: false }]);
     setUnqId((prev) => prev + 1);
   };
 
@@ -37,7 +37,7 @@ function Write({ name, email, fortune, goalList, setGoalList }: WriteProps) {
     const targetId = e.target.id.split('-')[1];
     const newList = [...goalList].map((goal) => {
       if (goal.id === Number(targetId)) {
-        return e.target.value.length < 31 ? { id: goal.id, content: e.target.value } : { ...goal };
+        return e.target.value.length < 31 ? { ...goal, content: e.target.value } : { ...goal };
       } else {
         return { ...goal };
       }
@@ -62,8 +62,15 @@ function Write({ name, email, fortune, goalList, setGoalList }: WriteProps) {
     }
   };
 
+  const handleBorderColor = (e: ChangeEvent<HTMLInputElement>) => {
+    const targetId = e.target.id.split('-')[1];
+    const newList = [...goalList].map((goal) =>
+      goal.id === Number(targetId) ? { ...goal, focus: e.type === 'focus' ? true : false } : { ...goal },
+    );
+    setGoalList(newList);
+  };
+
   const handleSubmit = () => {
-    console.log('click');
     // axios
     //   .post('url', {
     //     name,
@@ -96,11 +103,13 @@ function Write({ name, email, fortune, goalList, setGoalList }: WriteProps) {
         <section className='input-container'>
           <ul>
             {goalList.map((goal, i) => (
-              <li className='goal-box' key={goal.id}>
+              <li className={goal.focus ? 'goal-box focus' : 'goal-box'} key={goal.id}>
                 <input
                   value={goal.content}
                   id={'input-' + goal.id}
                   onChange={handleWriteGoal}
+                  onFocus={handleBorderColor}
+                  onBlur={handleBorderColor}
                   placeholder='목표를 적어보세요. (글자 수 제한 30자)'></input>
                 {i !== 0 && <span className='exit' id={'span-' + goal.id} onClick={handleRemoveGoalList}></span>}
               </li>
@@ -190,6 +199,7 @@ const KkachiTalk = styled.div<KkachiTalkProps>`
     font-weight: 800;
   }
 `;
+
 const WriteContainer = styled.div`
   .wrap-container {
     width: 100%;
@@ -228,9 +238,10 @@ const WriteContainer = styled.div`
         align-items: center;
         width: 100%;
         margin-bottom: 16px;
-        padding: 19px 20px;
+        padding: 0 20px;
         border: 1px solid ${({ theme }) => theme.colors.border};
         border-radius: 6px;
+        transition: 0.2s;
 
         &:last-child {
           margin-bottom: none;
@@ -238,6 +249,7 @@ const WriteContainer = styled.div`
 
         input {
           width: 90%;
+          padding: 19px 0;
           border: none;
         }
 
@@ -248,6 +260,10 @@ const WriteContainer = styled.div`
           margin-left: 19px;
           background: center/130% no-repeat url('../src/assets/images/input_delete.png');
         }
+      }
+
+      .focus {
+        border: 1px solid ${({ theme }) => theme.colors.p_light};
       }
 
       .add-btn {
@@ -289,6 +305,7 @@ const WriteContainer = styled.div`
         border-radius: 6px;
         font-size: 16px;
         cursor: not-allowed;
+        transition: 0.2s;
       }
 
       .active {
