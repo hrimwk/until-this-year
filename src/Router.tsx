@@ -15,6 +15,7 @@ type goal = { id: number; content: string; focus: boolean };
 function App() {
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
+  const [consentCheck, setConsentCheck] = useState(true);
   const [fortune, setfortune] = useState<string>('');
   const [goalList, setGoalList] = useState<goal[]>([{ id: 1, content: '', focus: false }]);
   return (
@@ -23,12 +24,31 @@ function App() {
       <ThemeProvider theme={theme}>
         <Routes>
           <Route path='/' element={<Intro />} />
-          <Route path='/user' element={<UserAuth name={name} setName={setName} email={email} setEmail={setEmail} />} />
+          <Route
+            path='/user'
+            element={
+              <UserAuth
+                name={name}
+                setName={setName}
+                email={email}
+                setEmail={setEmail}
+                consentCheck={consentCheck}
+                setConsentCheck={setConsentCheck}
+              />
+            }
+          />
           <Route path='/fortune' element={<FortuneList fortune={fortune} setfortune={setfortune} />} />
           <Route
             path='/write'
             element={
-              <Write name={name} email={email} fortune={fortune} goalList={goalList} setGoalList={setGoalList} />
+              <Write
+                name={name}
+                email={email}
+                fortune={fortune}
+                goalList={goalList}
+                setGoalList={setGoalList}
+                consentCheck={consentCheck}
+              />
             }
           />
           <Route path='/result' element={<Result name={name} goalList={goalList} />} />

@@ -10,10 +10,11 @@ interface UserAuthProps {
   setName: React.Dispatch<React.SetStateAction<string>>;
   email: string;
   setEmail: React.Dispatch<React.SetStateAction<string>>;
+  consentCheck: boolean;
+  setConsentCheck: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function UserAuth({ name, setName, email, setEmail }: UserAuthProps) {
-  const [consentCheck, setConsentCheck] = useState(true);
+function UserAuth({ name, setName, email, setEmail, consentCheck, setConsentCheck }: UserAuthProps) {
   const [modal, setModal] = useState(false);
   const navigator = useNavigate();
 
@@ -36,15 +37,17 @@ function UserAuth({ name, setName, email, setEmail }: UserAuthProps) {
 
   const handleGoNextStep = () => {
     // axios
-    //   .get(`http://localhost:8000/?email=${email}`)
+    //   .post('http://localhost:8080/users/check', { email })
     //   .then((res) => {
-    //     if (!res) {
+    //     if (res.data.message === 'Available') {
     //       navigator('/fortune');
-    //     } else {
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     if (err.response.status === 409) {
     setModal(true);
+    //     return;
     //   }
-    // })
-    // .catch((err) => {
     //   alert('에러가 발생했습니다. 잠시 후 다시 시도해주세요.');
     //   console.log(err);
     // });
