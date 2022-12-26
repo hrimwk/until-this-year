@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import ArrowBack from '../components/common/ArrowBack';
 import fortune_love from '../assets/images/fortune_love.png';
 import React, { useState } from 'react';
-import Modal from '../components/common/Modal';
+import Modal from '../components/fortuneList/Modal';
 
 type PropsType = {
   fortune: string;
@@ -62,12 +62,13 @@ const FortuneListContainer = styled.div`
     margin-bottom: 28px;
     width: 50%;
     text-align: center;
+    cursor: pointer;
     span {
       display: block;
       margin: 10px 0 10px;
       width: 100%;
       height: 1px;
-      background: ${(props) => props.theme.colors.border};
+      background: ${({ theme }) => theme.colors.border};
     }
   }
 `;
