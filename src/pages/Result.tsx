@@ -1,25 +1,83 @@
-import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { toPng } from 'html-to-image';
 import styled from 'styled-components';
 import usePreventLeave from '../assets/utils/result/usePreventLeave';
 import Share from '../components/result/Share';
 
 interface ResultProps {
   name: string;
+  email: string;
   goalList: { id: number; content: string }[];
 }
 
-function Result({ name, goalList }: ResultProps) {
+function Result({ name, email, goalList }: ResultProps) {
+  const { enablePrevent, disablePrevent } = usePreventLeave();
+  const cardRef = useRef<HTMLElement>(null);
+  const navigator = useNavigate();
+  const [imgUrl, setImgUrl] = useState<string>();
+
+  const downloadImg = () => {
+    if (cardRef.current === null) return;
+    toPng(cardRef.current, { cacheBust: true })
+      .then((dataUrl) => {
+        const link = document.createElement('a');
+        link.download = '2023MYGOALS_올해까치.png';
+        link.href = dataUrl;
+        link.click();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const goMain = () => {
+    navigator('/');
+    location.reload();
+  };
+
   useEffect(() => {
     enablePrevent();
 
     return () => disablePrevent();
   }, []);
-  const { enablePrevent, disablePrevent } = usePreventLeave();
+
+  useEffect(() => {
+    if (cardRef.current === null) return;
+    toPng(cardRef.current, { cacheBust: true })
+      .then((dataUrl) => {
+        const formData = new FormData();
+        formData.append('file', dataUrl);
+        formData.append('upload_preset', import.meta.env.VITE_CLOUDINARY_PRESET);
+        formData.append('folder', 'kkachi');
+        fetch(import.meta.env.VITE_CLOUDINARY_URL, {
+          method: 'POST',
+          body: formData,
+        })
+          .then((res) => res.json())
+          .then((res) => {
+            setImgUrl(res.url);
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [cardRef]);
+
+  useEffect(() => {
+    if (imgUrl) {
+      axios
+        .post('url', { email, image: imgUrl })
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+    }
+  }, [imgUrl]);
+
   return (
     <ResultContainer className='container'>
       <p className='sub-title-1 c-gy-500 desc'>카드를 뒤집어보세요!</p>
-      <section className='goal-container'>
+      <section className='goal-container' ref={cardRef}>
         <div className='ratio-container'>
           <div className='absolute-container'>
             <h2 className='sub-title-1-eb c-bk title'>{name}님의 올해 목표</h2>
@@ -34,15 +92,15 @@ function Result({ name, goalList }: ResultProps) {
         </div>
       </section>
       <section className='sns-container'>
-        <Share />
+        <Share downloadImg={downloadImg} />
         <p className='body-txt-2 c-gy-500'>
           이메일은 <b className='sub-title-2'>2023년 6월 30일</b>에 보내드려요
         </p>
         <p className='body-txt-2 c-gy-500'>버그제보/문의 email@email.com</p>
       </section>
-      <Link to='/' className='btn-txt-12 c-bk link'>
+      <p className='btn-txt-12 c-bk link' onClick={goMain}>
         처음으로 돌아가기
-      </Link>
+      </p>
     </ResultContainer>
   );
 }
@@ -62,6 +120,7 @@ const ResultContainer = styled.div`
     max-width: 335px;
     max-height: 480px;
     margin-bottom: 16px;
+    background-color: #fff;
 
     .ratio-container {
       position: relative;
@@ -148,6 +207,7 @@ const ResultContainer = styled.div`
 
   .link {
     padding: 14px 24px;
+    cursor: pointer;
 
     &:active {
       color: ${({ theme }) => theme.colors.p_mid};

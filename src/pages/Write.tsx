@@ -81,7 +81,7 @@ function Write({ name, email, goalList, setGoalList, consentCheck }: WriteProps)
     //   })
     //   .then((res) => {
     setGoalList((prev) => [...prev].filter((goal) => !!goal.content));
-    //   navigator('/result');
+    navigator('/result');
     // })
     // .catch((err) => {
     //   console.log(err);
