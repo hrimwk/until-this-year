@@ -25,7 +25,12 @@ function App() {
           <Route path='/' element={<Intro />} />
           <Route path='/user' element={<UserAuth name={name} setName={setName} email={email} setEmail={setEmail} />} />
           <Route path='/fortune' element={<FortuneList fortune={fortune} setfortune={setfortune} />} />
-          <Route path='/write' element={<Write />} />
+          <Route
+            path='/write'
+            element={
+              <Write name={name} email={email} fortune={fortune} goalList={goalList} setGoalList={setGoalList} />
+            }
+          />
           <Route path='/result' element={<Result name={name} goalList={goalList} />} />
         </Routes>
       </ThemeProvider>
