@@ -24,12 +24,14 @@ const UserModal = ({ setModal }: UserModalProps) => {
           <br />
           새로운 내용으로 덮어씌우시겠습니까?
         </p>
-        <button className='sub-title-1 c-bk' onClick={handleBackStep}>
-          돌아가기
-        </button>
-        <button className='sub-title-1 c-bk' onClick={handleGoFortuneList}>
-          덮어씌우고 작성하기
-        </button>
+        <div className='btn-container'>
+          <button className='sub-title-1 c-bk' onClick={handleBackStep}>
+            돌아가기
+          </button>
+          <button className='sub-title-1 c-bk' onClick={handleGoFortuneList}>
+            덮어씌우기
+          </button>
+        </div>
       </div>
     </UserModalContainer>
   );
@@ -70,18 +72,32 @@ const UserModalContainer = styled.div`
       margin-bottom: 32px;
     }
 
-    button {
-      padding: 12px 24px;
-      border: 1px solid ${({ theme }) => theme.colors.border};
-      border-radius: 6px;
-      background-color: #fff;
+    .btn-container {
+      display: flex;
+      justify-content: center;
 
-      &:first-of-type {
-        margin-right: 16px;
+      @media screen and (max-width: 318px) {
+        flex-direction: column;
       }
 
-      &:active {
-        background-color: ${({ theme }) => theme.colors.p_light};
+      button {
+        padding: 12px 24px;
+        border: 1px solid ${({ theme }) => theme.colors.border};
+        border-radius: 6px;
+        background-color: #fff;
+
+        &:first-of-type {
+          margin-right: 16px;
+
+          @media screen and (max-width: 318px) {
+            margin-right: 0;
+            margin-bottom: 16px;
+          }
+        }
+
+        &:active {
+          background-color: ${({ theme }) => theme.colors.p_light};
+        }
       }
     }
   }
