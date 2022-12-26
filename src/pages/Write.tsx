@@ -10,15 +10,15 @@ type goalList = { id: number; content: string; focus: boolean }[];
 interface WriteProps {
   name: string;
   email: string;
-  fortune: string;
   goalList: goalList;
   setGoalList: React.Dispatch<React.SetStateAction<goalList>>;
   consentCheck: boolean;
 }
 
-function Write({ name, email, fortune, goalList, setGoalList, consentCheck }: WriteProps) {
+function Write({ name, email, goalList, setGoalList, consentCheck }: WriteProps) {
   const [unqId, setUnqId] = useState(2);
   const navigator = useNavigate();
+  const fortune = sessionStorage.getItem('fortune-type');
 
   const handleAddGoalList = () => {
     if (goalList.length >= 5) return;
@@ -46,7 +46,7 @@ function Write({ name, email, fortune, goalList, setGoalList, consentCheck }: Wr
     setGoalList(newList);
   };
 
-  const getFotuneColor = (fortune: string) => {
+  const getFotuneColor = (fortune: string | null) => {
     switch (fortune) {
       case 'love':
         return 'luck_p';
@@ -97,7 +97,7 @@ function Write({ name, email, fortune, goalList, setGoalList, consentCheck }: Wr
           <h1 className='title-2 title'>까치와 올해 목표를 적어봐요</h1>
           <div className='kkachi-face' />
           <KkachiTalk $fortuneColor={getFotuneColor(fortune)}>
-            <WriteSwiper fortune={fortune} />
+            <WriteSwiper />
           </KkachiTalk>
         </section>
         <section className='input-container'>

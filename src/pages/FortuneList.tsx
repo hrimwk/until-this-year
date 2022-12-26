@@ -4,12 +4,7 @@ import fortune_love from '../assets/images/fortune_love.png';
 import React, { useState } from 'react';
 import Modal from '../components/fortuneList/Modal';
 
-type PropsType = {
-  fortune: string;
-  setfortune: (data: string) => void;
-};
-function FotuneList(props: PropsType) {
-  const { fortune, setfortune } = props;
+function FotuneList() {
   const [visible, setVisible] = useState(false);
   const [modalId, setModalId] = useState<string>('');
 
@@ -42,7 +37,7 @@ function FotuneList(props: PropsType) {
           })}
         </div>
       </div>
-      <Modal visible={visible} setVisible={setVisible} modalId={modalId} setfortune={setfortune} />
+      <Modal visible={visible} setVisible={setVisible} modalId={modalId} />
     </FortuneListContainer>
   );
 }
