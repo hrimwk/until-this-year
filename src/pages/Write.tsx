@@ -259,6 +259,7 @@ const WriteContainer = styled.div`
           height: 11px;
           margin-left: 19px;
           background: center/130% no-repeat url('../src/assets/images/input_delete.png');
+          cursor: pointer;
         }
       }
 
@@ -273,6 +274,10 @@ const WriteContainer = styled.div`
         border: none;
         border-radius: 6px;
         background-color: #c5d7e566;
+
+        &:active {
+          background-color: #c5d7e5cc;
+        }
 
         .plus {
           display: inline-block;
