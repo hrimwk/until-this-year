@@ -57,9 +57,24 @@ const IntroContainer = styled.div`
     .title-2 {
       position: absolute;
       top: 24px;
-      left: 0;
+      left: 50%;
+      transform: translateX(-50%);
       width: 100%;
       text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      opacity: 0;
+      animation: moveIntroTitle 4s 1.7s cubic-bezier(0.09, 0.775, 0.01, 0.65) forwards;
+    }
+    @keyframes moveIntroTitle {
+      0% {
+        width: 0;
+        opacity: 0;
+      }
+      100% {
+        width: 100%;
+        opacity: 1;
+      }
     }
   }
   .bottom-text-area {
@@ -92,4 +107,5 @@ const IntroContainer = styled.div`
     }
   }
 `;
+
 export default Intro;
