@@ -13,7 +13,7 @@ function FortuneModal(props: PropsType) {
     { id: 'money', src: mock, alt: 'money', title: '재물/돈', info: '올해는 주머니 두둑한 부자' },
     { id: 'relationship', src: mock, alt: 'relationship', title: '대인관계', info: '넓게 두텁게 다양하게 평화롭게' },
     { id: 'ego', src: mock, alt: 'ego', title: '자아실현', info: '보람차고 성장하는 한 해' },
-    { id: 'health', src: mock, alt: 'health', title: '견강 ', info: '건강한 몸 건강한 정신' },
+    { id: 'health', src: mock, alt: 'health', title: '건강 ', info: '건강한 몸 건강한 정신' },
   ];
 
   return (

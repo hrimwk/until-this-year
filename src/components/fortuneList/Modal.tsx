@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import FortuneModal from '../fortuneList/FortuneModal';
+import FortuneModal from './FortuneModal';
 import exit from '../../assets/images/exit.png';
 import { useNavigate } from 'react-router-dom';
 
@@ -122,6 +122,10 @@ const ModalInner = styled.div`
       background: #fff;
       border: 1px solid #eeeeee;
       border-radius: 6px;
+      &:active {
+        border: none;
+        background: ${({ theme }) => theme.colors.p_light};
+      }
     }
   }
 `;
