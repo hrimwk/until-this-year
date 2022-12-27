@@ -45,7 +45,7 @@ const UserModalContainer = styled.div`
   left: 50%;
   min-height: 100vh;
   width: 100%;
-  max-width: 540px;
+  max-width: 430px;
   display: flex;
   justify-content: center;
   align-items: center;

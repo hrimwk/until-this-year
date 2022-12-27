@@ -14,7 +14,7 @@ declare global {
     Kakao: any;
   }
 }
-function Share({ downloadImg }: { downloadImg: () => void }) {
+function Share() {
   const currentUrl = window.location.href;
   useEffect(() => {
     if (window.Kakao) {
@@ -51,7 +51,7 @@ function Share({ downloadImg }: { downloadImg: () => void }) {
           <img src={url} alt='url' />
         </div>
       </CopyToClipboard>
-      <div className='img-wrap' onClick={downloadImg}>
+      <div className='img-wrap'>
         <img src={download} alt='download' />
       </div>
     </ShareContainer>

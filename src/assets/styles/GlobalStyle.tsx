@@ -55,7 +55,7 @@ const GlobalStyle = createGlobalStyle`
         margin: 0 auto;
         padding: 24px 20px;
         min-height: 100vh;
-        max-width: 540px; 
+        max-width: 430px; 
 
     }
     .c-bk{

@@ -293,7 +293,7 @@ const WriteContainer = styled.div`
       position: fixed;
       bottom: 0;
       width: 100%;
-      max-width: 540px;
+      max-width: 430px;
       padding: 20px;
       background: linear-gradient(
         0deg,
