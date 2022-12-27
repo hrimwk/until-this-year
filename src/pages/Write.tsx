@@ -1,9 +1,12 @@
 import { useState, MouseEvent, ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import styled, { DefaultTheme } from 'styled-components';
+import styled from 'styled-components';
 import ArrowBack from '../components/common/ArrowBack';
 import WriteSwiper from '../components/write/WriteSwiper';
+import { profileUrl } from '../assets/utils/write/assetsUrl';
+import { getFortuneColor, KkachiColorProps } from '../assets/utils/write/getFortuneColor';
+import { getAssetUrl } from '../assets/utils/result/assetsUrl';
 
 type goalList = { id: number; content: string; focus: boolean }[];
 
@@ -46,23 +49,6 @@ function Write({ name, email, goalList, setGoalList, consentCheck }: WriteProps)
     setGoalList(newList);
   };
 
-  const getFotuneColor = (fortune: string | null) => {
-    switch (fortune) {
-      case 'love':
-        return 'luck_p';
-      case 'money':
-        return 'luck_g';
-      case 'relationship':
-        return 'luck_bl';
-      case 'ego':
-        return 'luck_r';
-      case 'health':
-        return 'luck_gr';
-      default:
-        return 'luck_bl';
-    }
-  };
-
   const handleBorderColor = (e: ChangeEvent<HTMLInputElement>) => {
     const targetId = e.target.id.split('-')[1];
     const newList = [...goalList].map((goal) =>
@@ -95,8 +81,8 @@ function Write({ name, email, goalList, setGoalList, consentCheck }: WriteProps)
       <div className='wrap-container'>
         <section className='kkachi-container'>
           <h1 className='title-2 title'>까치와 올해 목표를 적어봐요</h1>
-          <div className='kkachi-face' />
-          <KkachiTalk $fortuneColor={getFotuneColor(fortune)}>
+          <KkachiFace className='kkachi-face' $imgUrl={profileUrl[getAssetUrl(fortune || '')]} />
+          <KkachiTalk $fortuneColor={getFortuneColor(fortune)}>
             <h5 className='sub-title-2'>까치의 한마디</h5>
             <WriteSwiper />
           </KkachiTalk>
@@ -137,12 +123,11 @@ function Write({ name, email, goalList, setGoalList, consentCheck }: WriteProps)
   );
 }
 
-type KkachiTalkProps = {
-  theme: DefaultTheme;
-  $fortuneColor: string;
-};
+const KkachiFace = styled.div`
+  background: ${({ $imgUrl }: { $imgUrl: string }) => `center/100% no-repeat url(${$imgUrl})`};
+`;
 
-const KkachiTalk = styled.div<KkachiTalkProps>`
+const KkachiTalk = styled.div<KkachiColorProps>`
   position: relative;
   width: 80%;
   margin: 0 20px 24px 20px;
