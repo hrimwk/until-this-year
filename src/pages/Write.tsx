@@ -111,7 +111,9 @@ function Write({ name, email, goalList, setGoalList, consentCheck }: WriteProps)
                   onChange={handleWriteGoal}
                   onFocus={handleBorderColor}
                   onBlur={handleBorderColor}
-                  placeholder='목표를 적어보세요. (글자 수 제한 30자)'></input>
+                  placeholder='목표를 적어보세요. (글자 수 제한 30자)'
+                  autoFocus={goalList.length - 1 === i ? true : false}
+                />
                 {i !== 0 && <span className='exit' id={'span-' + goal.id} onClick={handleRemoveGoalList}></span>}
               </li>
             ))}
