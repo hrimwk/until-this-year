@@ -110,7 +110,7 @@ const ModalInner = styled.div`
     cursor: pointer;
   }
   .modal-button-area {
-    position: absolute;
+    position: fixed;
     bottom: 20px;
     left: 0;
     width: 100%;

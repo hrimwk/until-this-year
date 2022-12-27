@@ -50,7 +50,7 @@ const IntroContainer = styled.div`
   margin: 0 auto;
   padding-bottom: 20px;
   min-height: 100vh;
-  max-width: 540px;
+  max-width: 430px;
   .top-img-area {
     position: relative;
     height: fit-content;
@@ -90,7 +90,7 @@ const IntroContainer = styled.div`
     position: fixed;
     bottom: 0;
     width: 100%;
-    max-width: 540px;
+    max-width: 430px;
     padding: 20px;
     background: linear-gradient(
       0deg,
