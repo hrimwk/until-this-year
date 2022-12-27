@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toPng } from 'html-to-image';
 import styled from 'styled-components';
-import usePreventLeave from '../assets/utils/result/usePreventLeave';
+
 import Share from '../components/result/Share';
 
 interface ResultProps {
@@ -13,7 +13,6 @@ interface ResultProps {
 }
 
 function Result({ name, email, goalList }: ResultProps) {
-  const { enablePrevent, disablePrevent } = usePreventLeave();
   const cardRef = useRef<HTMLElement>(null);
   const navigator = useNavigate();
   const [imgUrl, setImgUrl] = useState<string>();
@@ -37,12 +36,6 @@ function Result({ name, email, goalList }: ResultProps) {
     navigator('/');
     location.reload();
   };
-
-  useEffect(() => {
-    enablePrevent();
-
-    return () => disablePrevent();
-  }, []);
 
   useEffect(() => {
     if (cardRef.current === null) return;

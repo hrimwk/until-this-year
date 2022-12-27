@@ -1,12 +1,15 @@
 import styled from 'styled-components';
 import ArrowBack from '../components/common/ArrowBack';
 import fortune_love from '../assets/images/fortune_love.png';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from '../components/fortuneList/Modal';
+import usePreventLeave from '../assets/utils/result/usePreventLeave';
 
 function FotuneList() {
   const [visible, setVisible] = useState(false);
   const [modalId, setModalId] = useState<string>('');
+
+  const { enablePrevent, disablePrevent } = usePreventLeave();
 
   const FORTUNE_LIST = [
     { src: fortune_love, info: '연애/결혼', id: 'love', alt: 'love' },
@@ -15,6 +18,13 @@ function FotuneList() {
     { src: fortune_love, info: '자아실현', id: 'ego', alt: 'ego' },
     { src: fortune_love, info: '건강', id: 'health', alt: 'health' },
   ];
+
+  useEffect(() => {
+    enablePrevent();
+
+    return () => disablePrevent();
+  }, []);
+
   const modalClick = (e: React.MouseEvent) => {
     setVisible(true);
     setModalId(e.currentTarget.id);
