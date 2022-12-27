@@ -51,7 +51,7 @@ function Share({ downloadImg }: { downloadImg: () => void }) {
           <img src={url} alt='url' />
         </div>
       </CopyToClipboard>
-      <div className='img-wrap'>
+      <div className='img-wrap' onClick={downloadImg}>
         <img src={download} alt='download' />
       </div>
     </ShareContainer>
