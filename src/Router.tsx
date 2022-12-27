@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyle from './assets/styles/GlobalStyle';
 import theme from './assets/styles/theme';
@@ -36,20 +36,27 @@ function App() {
               />
             }
           />
-          <Route path='/fortune' element={<FortuneList />} />
+          <Route path='/fortune' element={email ? <FortuneList /> : <Navigate to='/' />} />
           <Route
             path='/write'
             element={
-              <Write
-                name={name}
-                email={email}
-                goalList={goalList}
-                setGoalList={setGoalList}
-                consentCheck={consentCheck}
-              />
+              email ? (
+                <Write
+                  name={name}
+                  email={email}
+                  goalList={goalList}
+                  setGoalList={setGoalList}
+                  consentCheck={consentCheck}
+                />
+              ) : (
+                <Navigate to='/' />
+              )
             }
           />
-          <Route path='/result' element={<Result name={name} email={email} goalList={goalList} />} />
+          <Route
+            path='/result'
+            element={email ? <Result name={name} email={email} goalList={goalList} /> : <Navigate to='/' />}
+          />
         </Routes>
       </ThemeProvider>
     </BrowserRouter>
