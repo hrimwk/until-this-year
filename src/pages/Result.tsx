@@ -2,11 +2,12 @@ import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toPng } from 'html-to-image';
-import styled from 'styled-components';
+import styled, { DefaultTheme } from 'styled-components';
 
 import Share from '../components/result/Share';
 import htmlToPng from '../assets/utils/result/htmlToPng';
 import { frontCardUrl, backCardUrl, getAssetUrl } from '../../src/assets/utils/result/assetsUrl';
+import { getFortuneColor, KkachiColorProps } from '../assets/utils/write/getFortuneColor';
 
 interface ResultProps {
   name: string;
@@ -20,6 +21,7 @@ function Result({ name, email, goalList }: ResultProps) {
   const navigator = useNavigate();
   const [imgUrl, setImgUrl] = useState<string>();
   const [flip, setFlip] = useState(false);
+  const fortune = sessionStorage.getItem('fortune-type');
 
   const downloadImg = () => {
     if (goalRef.current === null || kkachiRef.current === null) return;
@@ -69,17 +71,23 @@ function Result({ name, email, goalList }: ResultProps) {
       <p className='sub-title-1 c-gy-500 desc'>카드를 눌러서 뒤집어 보세요! </p>
       <section className='goal-container'>
         <FilpContainer className='ratio-container' onClick={handleCardFlip} $flip={flip}>
-          <div className='absolute-container' ref={goalRef}>
+          <GoalCard className='absolute-container' ref={goalRef} $imgUrl={backCardUrl[getAssetUrl(fortune || '')]}>
             <h2 className='sub-title-1-eb c-bk title'>{name}님의 올해 목표</h2>
             <ul>
               {goalList?.map((goal) => (
-                <li className='body-txt-1 c-gy-900 goal' key={goal.id}>
+                <Goal className='body-txt-1 c-gy-900' key={goal.id} $fortuneColor={getFortuneColor(fortune || '')}>
                   {goal.content}
-                </li>
+                </Goal>
               ))}
             </ul>
+          </GoalCard>
+          <div className='illust-container' ref={kkachiRef}>
+            <img
+              src={frontCardUrl[getAssetUrl(fortune || '')].url}
+              alt={frontCardUrl[getAssetUrl(fortune || '')].alt}
+              className='front-card'
+            />
           </div>
-          <div className='illust-container' ref={kkachiRef}></div>
         </FilpContainer>
       </section>
       <section className='sns-container'>
@@ -98,8 +106,16 @@ function Result({ name, email, goalList }: ResultProps) {
   );
 }
 
+const GoalCard = styled.div`
+  background: ${({ $imgUrl }: { $imgUrl: string }) => `center/100% no-repeat url(${$imgUrl})`};
+`;
+
 const FilpContainer = styled.div`
   transform: ${({ $flip }: { $flip: boolean }) => ($flip ? 'rotateY(0deg)' : 'rotateY(180deg)')};
+`;
+
+const Goal = styled.li<KkachiColorProps>`
+  border-bottom: 1px solid ${({ theme, $fortuneColor }) => theme.colors[$fortuneColor]};
 `;
 
 const ResultContainer = styled.div`
@@ -138,9 +154,13 @@ const ResultContainer = styled.div`
         background-color: #fff;
         backface-visibility: hidden;
         transform: rotateY(180deg);
+
+        .front-card {
+          width: 100%;
+        }
       }
 
-      .absolute-container {
+      ${GoalCard} {
         position: absolute;
         left: 0;
         top: 0;
@@ -170,9 +190,8 @@ const ResultContainer = styled.div`
           }
         }
 
-        .goal {
+        ${Goal} {
           padding: 20px 0;
-          border-bottom: 1px solid ${({ theme }) => theme.colors.border};
 
           @media screen and (min-width: 300px) and (max-width: 370px) {
             padding: 16px 0;
