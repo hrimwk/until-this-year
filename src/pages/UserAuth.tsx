@@ -76,7 +76,11 @@ function UserAuth({ name, setName, email, setEmail, consentCheck, setConsentChec
             onChange={writeEmail}
             required
           />
-          {email.length > 0 && !validEmail(email) && <p className='body-txt-2'>이메일 형식이 맞지 않습니다.</p>}
+          {email.length > 0 && !validEmail(email) ? (
+            <p className='body-txt-2'>이메일 형식이 맞지 않습니다.</p>
+          ) : (
+            <div className='fake-font'>&nbsp;</div>
+          )}
         </form>
         <section className='checkbox-container'>
           <div className='checkbox-box'>
@@ -102,7 +106,7 @@ function UserAuth({ name, setName, email, setEmail, consentCheck, setConsentChec
             <li className='term'>
               <p className='c-gy-500 sub-title-2'>개인정보의 보유 및 이용기간</p>
               <p className='c-gy-500 body-txt-2'>
-                이메일 발송/공유 서비스를 위해 아래와 같은 개인정보를 수집하고 있습니다.
+                메일 발송/공유 서비스를 위해 하단의 개인정보를 수집하고 있습니다.
                 <br />
                 수집항목 : 닉네임, 이메일
               </p>
@@ -114,14 +118,14 @@ function UserAuth({ name, setName, email, setEmail, consentCheck, setConsentChec
               </p>
             </li>
           </ul>
-          <section className='button-area'>
-            <button
-              className={validEmail(email) && name ? 'btn active btn-txt-eb c-wt' : 'btn btn-txt-eb c-gy-500'}
-              onClick={handleGoNextStep}
-              disabled={!!name && validEmail(email) ? false : true}>
-              새해 복 받으러 가기
-            </button>
-          </section>
+        </section>
+        <section className='button-area'>
+          <button
+            className={validEmail(email) && name ? 'btn active btn-txt-eb c-wt' : 'btn btn-txt-eb c-gy-500'}
+            onClick={handleGoNextStep}
+            disabled={!!name && validEmail(email) ? false : true}>
+            새해 복 받으러 가기
+          </button>
         </section>
       </div>
     </UserAuthtContainer>
@@ -171,6 +175,11 @@ const UserAuthtContainer = styled.div`
 
       .border-red {
         border: 1px solid #ff1c1c;
+      }
+
+      .fake-font {
+        display: inline-block;
+        opacity: 0;
       }
 
       p {
@@ -253,10 +262,6 @@ const UserAuthtContainer = styled.div`
     }
 
     .terms-container {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
       width: 100%;
       margin: 0 4px 60px 4px;
 
