@@ -1,12 +1,12 @@
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import { Pagination, Autoplay } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { Swiper, SwiperSlide } from 'swiper/react';
 
 const WriteSwiper = () => {
   const fortune = sessionStorage.getItem('fortune-type');
   const sentencesOfKkachi = [
-    ['올해는 자신감 넘치는 태도 가지기 어때?', '다른 사람의 장점 찾아보는 습관 들이기 어때?', '주변을 둘러보기 어때?'],
+    ['올해는 자신감 넘치는 태도 가지기 어때?', '다른 사람의 매력 포인트 찾아보기 어때?', '주변을 둘러보기 어때?'],
     [
       '올해는 매달 5만원씩 저축하기 어때?',
       '적금 1개 가입하기 어때?',
@@ -17,7 +17,7 @@ const WriteSwiper = () => {
       '기분이 태도가 되지 않기 어때?',
       '새로운 동호회 가입하기 어때?',
       '오랜만에 지인에게 연락하기 어때?',
-      '주변 사람들과 관심사를 공유해보는 건 어때?',
+      '사람들과 관심사를 공유해보는 건 어때?',
       '생일인 친구에게 문자 하나 보내보기 어때?',
     ],
     [
@@ -53,10 +53,16 @@ const WriteSwiper = () => {
     }
   };
   return (
-    <Swiper modules={[Pagination]} pagination={true} loop={true}>
+    <Swiper
+      modules={[Pagination, Autoplay]}
+      pagination={true}
+      loop={true}
+      autoplay={{
+        delay: 3500,
+        disableOnInteraction: false,
+      }}>
       {sentencesOfKkachi[getStrings(fortune)].map((strings) => (
         <SwiperSlide key={strings}>
-          <h5 className='sub-title-2'>까치의 한마디</h5>
           <p className='body-txt-1'>{strings}</p>
         </SwiperSlide>
       ))}

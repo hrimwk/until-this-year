@@ -97,6 +97,7 @@ function Write({ name, email, goalList, setGoalList, consentCheck }: WriteProps)
           <h1 className='title-2 title'>까치와 올해 목표를 적어봐요</h1>
           <div className='kkachi-face' />
           <KkachiTalk $fortuneColor={getFotuneColor(fortune)}>
+            <h5 className='sub-title-2'>까치의 한마디</h5>
             <WriteSwiper />
           </KkachiTalk>
         </section>

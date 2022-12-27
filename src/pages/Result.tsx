@@ -72,7 +72,7 @@ function Result({ name, email, goalList }: ResultProps) {
 
   return (
     <ResultContainer className='container'>
-      <p className='sub-title-1 c-gy-500 desc'>카드를 뒤집어보세요!</p>
+      <p className='sub-title-1 c-gy-500 desc'>카드를 눌러서 뒤집어 보세요! </p>
       <section className='goal-container' ref={cardRef}>
         <FilpContainer className='ratio-container' onClick={handleCardFlip} $flip={flip}>
           <div className='absolute-container'>
@@ -89,11 +89,13 @@ function Result({ name, email, goalList }: ResultProps) {
         </FilpContainer>
       </section>
       <section className='sns-container'>
-        <Share downloadImg={downloadImg} />
+        <div className='btn-box'>
+          <Share downloadImg={downloadImg} />
+        </div>
         <p className='body-txt-2 c-gy-500'>
           이메일은 <b className='sub-title-2'>2023년 6월 30일</b>에 보내드려요
         </p>
-        <p className='body-txt-2 c-gy-500'>버그제보/문의 email@email.com</p>
+        <p className='body-txt-2 c-gy-500'>버그제보/문의 10004team@email.com</p>
       </section>
       <p className='btn-txt-12 c-bk link' onClick={goMain}>
         처음으로 돌아가기
@@ -103,7 +105,7 @@ function Result({ name, email, goalList }: ResultProps) {
 }
 
 const FilpContainer = styled.div`
-  transform: ${({ $flip }: { $flip: boolean }) => ($flip ? 'rotateY(180deg)' : 'rotateY(0deg)')};
+  transform: ${({ $flip }: { $flip: boolean }) => ($flip ? 'rotateY(0deg)' : 'rotateY(180deg)')};
 `;
 
 const ResultContainer = styled.div`
@@ -210,17 +212,7 @@ const ResultContainer = styled.div`
     }
 
     .btn-box {
-      display: flex;
-      justify-content: space-between;
       margin-bottom: 16px;
-      padding: 0 4px;
-
-      .sns-btn {
-        width: 44px;
-        height: 44px;
-        border-radius: 50%;
-        background-color: ${({ theme }) => theme.colors.p_mid};
-      }
     }
   }
 
@@ -234,6 +226,12 @@ const ResultContainer = styled.div`
 
     @media screen and (max-height: 715px) {
       padding: 5px 24px;
+    }
+
+    @media screen and (min-height: 800px) {
+      position: fixed;
+      bottom: 44px;
+      padding: 14px 24px;
     }
   }
 `;
