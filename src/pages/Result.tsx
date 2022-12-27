@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 import Share from '../components/result/Share';
 import htmlToPng from '../assets/utils/result/htmlToPng';
+import { frontCardUrl, backCardUrl, getAssetUrl } from '../../src/assets/utils/result/assetsUrl';
 
 interface ResultProps {
   name: string;
