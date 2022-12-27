@@ -98,13 +98,13 @@ function UserAuth({ name, setName, email, setEmail, consentCheck, setConsentChec
           <div className='advice-box body-txt-1 c-gy-900'>
             올해 세웠던 목표를 돌아보면서
             <br />
-            알찬 일년을 다시 한번 다짐해보는 기회가 될거예요.
+            알찬 일 년을 다시 한번 다짐해 보는 기회가 될 거예요.
           </div>
         </section>
         <section className='terms-container'>
           <ul className='terms-list'>
             <li className='term'>
-              <p className='c-gy-500 sub-title-2'>개인정보의 보유 및 이용기간</p>
+              <p className='c-gy-500 sub-title-2'>개인정보의 보유 및 이용 기간</p>
               <p className='c-gy-500 body-txt-2'>
                 메일 발송/공유 서비스를 위해 하단의 개인정보를 수집하고 있습니다.
                 <br />
