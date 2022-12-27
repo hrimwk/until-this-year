@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Splash from '../components/intro/Splash';
-import mock2 from '../assets/images/mock2.png';
+import intro from '../assets/images/intro/intro.jpeg';
 
 function Intro() {
   const [splash, setSplash] = useState(true);
@@ -20,7 +20,7 @@ function Intro() {
       {splash && <Splash />}
       <section className='top-img-area'>
         <h2 className='title-2'>어느새 새로운 해가 찾아왔네요</h2>
-        <img src={mock2} alt='설명 이미지' />
+        <img src={intro} alt='설명 이미지' />
       </section>
       <section className='bottom-text-area'>
         <h2 className='title-2'>
