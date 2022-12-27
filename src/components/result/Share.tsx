@@ -15,7 +15,7 @@ declare global {
   }
 }
 function Share({ downloadImg }: { downloadImg: () => void }) {
-  const currentUrl = window.location.href;
+  const SITE_URL = 'https://www.thisyearkkachi.site';
   useEffect(() => {
     if (window.Kakao) {
       const kakao = window.Kakao;
@@ -36,17 +36,17 @@ function Share({ downloadImg }: { downloadImg: () => void }) {
       <div className='img-wrap' onClick={shareKakao}>
         <img src={kakao} alt='kakao' />
       </div>
-      <FacebookShareButton url={currentUrl}>
+      <FacebookShareButton url={SITE_URL}>
         <div className='img-wrap'>
           <img src={facebook} alt='facebook' />
         </div>
       </FacebookShareButton>
-      <TwitterShareButton url={currentUrl}>
+      <TwitterShareButton url={SITE_URL}>
         <div className='img-wrap'>
           <img src={twitter} alt='twitter' />
         </div>
       </TwitterShareButton>
-      <CopyToClipboard text={currentUrl} onCopy={() => alert('클립보드에 복사되었습니다.')}>
+      <CopyToClipboard text={SITE_URL} onCopy={() => alert('클립보드에 복사되었습니다.')}>
         <div className='img-wrap'>
           <img src={url} alt='url' />
         </div>
