@@ -55,7 +55,7 @@ function Modal(props: propsType) {
             <img src={exit} alt='exit' />
           </span>
           <div className='modal-button-area'>
-            <button className='sub-title-1' onClick={clickButton}>
+            <button className='sub-title-1 c-bk' onClick={clickButton}>
               선택하기
             </button>
           </div>
