@@ -1,9 +1,14 @@
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import ArrowBack from '../components/common/ArrowBack';
-import fortune_love from '../assets/images/fortune_love.png';
-import React, { useEffect, useState } from 'react';
 import Modal from '../components/fortuneList/Modal';
 import usePreventLeave from '../assets/utils/result/usePreventLeave';
+
+import love from '../assets/images/fortune/bag_love.png';
+import money from '../assets/images/fortune/bag_money.png';
+import relationship from '../assets/images/fortune/bag_relationship.png';
+import ego from '../assets/images/fortune/bag_ego.png';
+import health from '../assets/images/fortune/bag_health.png';
 
 function FotuneList() {
   const [visible, setVisible] = useState(false);
@@ -12,11 +17,11 @@ function FotuneList() {
   const { enablePrevent, disablePrevent } = usePreventLeave();
 
   const FORTUNE_LIST = [
-    { src: fortune_love, info: '연애/결혼', id: 'love', alt: 'love' },
-    { src: fortune_love, info: '재물/돈', id: 'money', alt: 'money' },
-    { src: fortune_love, info: '대인관계', id: 'relationship', alt: 'relationship' },
-    { src: fortune_love, info: '자아실현', id: 'ego', alt: 'ego' },
-    { src: fortune_love, info: '건강', id: 'health', alt: 'health' },
+    { src: love, info: '연애/결혼', id: 'love', alt: 'love' },
+    { src: money, info: '재물/돈', id: 'money', alt: 'money' },
+    { src: relationship, info: '대인관계', id: 'relationship', alt: 'relationship' },
+    { src: ego, info: '자아실현', id: 'ego', alt: 'ego' },
+    { src: health, info: '건강', id: 'health', alt: 'health' },
   ];
 
   useEffect(() => {
