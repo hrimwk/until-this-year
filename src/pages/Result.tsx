@@ -5,6 +5,7 @@ import { toPng } from 'html-to-image';
 import styled from 'styled-components';
 
 import Share from '../components/result/Share';
+import htmlToPng from '../assets/utils/result/htmlToPng';
 
 interface ResultProps {
   name: string;
@@ -13,23 +14,15 @@ interface ResultProps {
 }
 
 function Result({ name, email, goalList }: ResultProps) {
-  const cardRef = useRef<HTMLElement>(null);
+  const goalRef = useRef<HTMLDivElement>(null);
+  const kkachiRef = useRef<HTMLDivElement>(null);
   const navigator = useNavigate();
   const [imgUrl, setImgUrl] = useState<string>();
   const [flip, setFlip] = useState(false);
 
   const downloadImg = () => {
-    if (cardRef.current === null) return;
-    toPng(cardRef.current, { cacheBust: true })
-      .then((dataUrl) => {
-        const link = document.createElement('a');
-        link.download = '2023MYGOALS_올해까치.png';
-        link.href = dataUrl;
-        link.click();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (goalRef.current === null || kkachiRef.current === null) return;
+    flip ? htmlToPng(goalRef) : htmlToPng(kkachiRef);
   };
 
   const goMain = () => {
@@ -38,8 +31,8 @@ function Result({ name, email, goalList }: ResultProps) {
   };
 
   useEffect(() => {
-    if (cardRef.current === null) return;
-    toPng(cardRef.current, { cacheBust: true })
+    if (goalRef.current === null) return;
+    toPng(goalRef.current, { cacheBust: true })
       .then((dataUrl) => {
         const formData = new FormData();
         formData.append('file', dataUrl);
@@ -57,12 +50,12 @@ function Result({ name, email, goalList }: ResultProps) {
       .catch((err) => {
         console.log(err);
       });
-  }, [cardRef]);
+  }, [goalRef, kkachiRef]);
 
   useEffect(() => {
     if (imgUrl) {
       axios
-        .post('url', { email, image: imgUrl })
+        .post('http://localhost:8080/users/image', { email, image: imgUrl })
         .then((res) => console.log(res))
         .catch((err) => console.log(err));
     }
@@ -73,9 +66,9 @@ function Result({ name, email, goalList }: ResultProps) {
   return (
     <ResultContainer className='container'>
       <p className='sub-title-1 c-gy-500 desc'>카드를 눌러서 뒤집어 보세요! </p>
-      <section className='goal-container' ref={cardRef}>
+      <section className='goal-container'>
         <FilpContainer className='ratio-container' onClick={handleCardFlip} $flip={flip}>
-          <div className='absolute-container'>
+          <div className='absolute-container' ref={goalRef}>
             <h2 className='sub-title-1-eb c-bk title'>{name}님의 올해 목표</h2>
             <ul>
               {goalList?.map((goal) => (
@@ -85,7 +78,7 @@ function Result({ name, email, goalList }: ResultProps) {
               ))}
             </ul>
           </div>
-          <div className='illust-container'></div>
+          <div className='illust-container' ref={kkachiRef}></div>
         </FilpContainer>
       </section>
       <section className='sns-container'>

@@ -234,6 +234,7 @@ const WriteContainer = styled.div`
 
     .input-container {
       width: 100%;
+      margin-bottom: 70px;
 
       .goal-box {
         display: flex;
