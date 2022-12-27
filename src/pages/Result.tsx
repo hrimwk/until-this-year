@@ -95,7 +95,7 @@ function Result({ name, email, goalList }: ResultProps) {
         <p className='body-txt-2 c-gy-500'>
           이메일은 <b className='sub-title-2'>2023년 6월 30일</b>에 보내드려요
         </p>
-        <p className='body-txt-2 c-gy-500'>버그제보/문의 10004team@email.com</p>
+        <p className='body-txt-2 c-gy-500'>버그제보/문의 10004team@gmail.com</p>
       </section>
       <p className='btn-txt-12 c-bk link' onClick={goMain}>
         처음으로 돌아가기

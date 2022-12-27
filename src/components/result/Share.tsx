@@ -14,7 +14,7 @@ declare global {
     Kakao: any;
   }
 }
-function Share() {
+function Share({ downloadImg }: { downloadImg: () => void }) {
   const currentUrl = window.location.href;
   useEffect(() => {
     if (window.Kakao) {
