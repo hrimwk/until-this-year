@@ -58,21 +58,22 @@ function Write({ name, email, goalList, setGoalList, consentCheck }: WriteProps)
   };
 
   const handleSubmit = () => {
-    // axios
-    //   .post(import.meta.env.VITE_SERVER_REGISTRAION_URL, {
-    //     nickname: name,
-    //     email,
-    //     opt_in: consentCheck,
-    //     goals: goalList.filter((goal) => !!goal.content).map((goalObj) => goalObj.content),
-    //   })
-    //   .then((res) => {
-    setGoalList((prev) => [...prev].filter((goal) => !!goal.content));
-    navigator('/result');
-    // })
-    // .catch((err) => {
-    //   console.log(err);
-    //   alert('네트워크 에러가 발생했습니다. 잠시 후 다시 시도해주세요.');
-    // });
+    axios
+      .post(import.meta.env.VITE_SERVER_REGISTRAION_URL, {
+        nickname: name,
+        email,
+        fortune_id: fortune,
+        opt_in: consentCheck,
+        goals: goalList.filter((goal) => !!goal.content).map((goalObj) => goalObj.content),
+      })
+      .then((res) => {
+        setGoalList((prev) => [...prev].filter((goal) => !!goal.content));
+        navigator('/result');
+      })
+      .catch((err) => {
+        console.log(err);
+        alert('네트워크 에러가 발생했습니다. 잠시 후 다시 시도해주세요.');
+      });
   };
 
   return (
