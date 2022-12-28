@@ -62,6 +62,7 @@ function Write({ name, email, goalList, setGoalList, consentCheck }: WriteProps)
     //   .post(import.meta.env.VITE_SERVER_REGISTRAION_URL, {
     //     nickname: name,
     //     email,
+    //     fortune_id: fortune,
     //     opt_in: consentCheck,
     //     goals: goalList.filter((goal) => !!goal.content).map((goalObj) => goalObj.content),
     //   })
