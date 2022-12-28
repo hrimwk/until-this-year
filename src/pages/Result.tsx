@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toPng } from 'html-to-image';
-import styled, { DefaultTheme } from 'styled-components';
+import styled from 'styled-components';
 
 import Share from '../components/result/Share';
 import htmlToPng from '../assets/utils/result/htmlToPng';
@@ -60,7 +60,7 @@ function Result({ name, email, goalList }: ResultProps) {
   // useEffect(() => {
   //   if (imgUrl) {
   //     axios
-  //       .post('http://localhost:8080/users/image', { email, image: imgUrl })
+  //       .post(import.meta.env.VITE_SERVER_IMAGE_URL, { email, image: imgUrl })
   //       .then((res) => console.log(res))
   //       .catch((err) => console.log(err));
   //   }
