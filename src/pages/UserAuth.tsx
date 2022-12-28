@@ -37,7 +37,7 @@ function UserAuth({ name, setName, email, setEmail, consentCheck, setConsentChec
 
   const handleGoNextStep = () => {
     // axios
-    //   .post('http://localhost:8080/users/check', { email })
+    //   .post(import.meta.env.VITE_SERVER_EMAIL_CHECK_URL, { email })
     //   .then((res) => {
     //     if (res.data.message === 'Available') {
     //       navigator('/fortune');

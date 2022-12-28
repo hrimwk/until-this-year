@@ -59,7 +59,7 @@ function Write({ name, email, goalList, setGoalList, consentCheck }: WriteProps)
 
   const handleSubmit = () => {
     // axios
-    //   .post('http://localhost:8080/users/registration', {
+    //   .post(import.meta.env.VITE_SERVER_REGISTRAION_URL, {
     //     nickname: name,
     //     email,
     //     opt_in: consentCheck,

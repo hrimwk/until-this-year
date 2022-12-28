@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toPng } from 'html-to-image';
-import styled, { DefaultTheme } from 'styled-components';
+import styled from 'styled-components';
 
 import Share from '../components/result/Share';
 import htmlToPng from '../assets/utils/result/htmlToPng';
@@ -33,36 +33,38 @@ function Result({ name, email, goalList }: ResultProps) {
     location.reload();
   };
 
-  useEffect(() => {
-    if (goalRef.current === null) return;
-    toPng(goalRef.current, { cacheBust: true })
-      .then((dataUrl) => {
-        const formData = new FormData();
-        formData.append('file', dataUrl);
-        formData.append('upload_preset', import.meta.env.VITE_CLOUDINARY_PRESET);
-        formData.append('folder', 'kkachi');
-        fetch(import.meta.env.VITE_CLOUDINARY_URL, {
-          method: 'POST',
-          body: formData,
-        })
-          .then((res) => res.json())
-          .then((res) => {
-            setImgUrl(res.url);
-          });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [goalRef, kkachiRef]);
+  // useEffect(() => {
+  //   if (goalRef.current === null) return;
+  //   if (!imgUrl) {
+  //     toPng(goalRef.current, { cacheBust: true })
+  //       .then((dataUrl) => {
+  //         const formData = new FormData();
+  //         formData.append('file', dataUrl);
+  //         formData.append('upload_preset', import.meta.env.VITE_CLOUDINARY_PRESET);
+  //         formData.append('folder', 'kkachi');
+  //         fetch(import.meta.env.VITE_CLOUDINARY_URL, {
+  //           method: 'POST',
+  //           body: formData,
+  //         })
+  //           .then((res) => res.json())
+  //           .then((res) => {
+  //             setImgUrl(res.url);
+  //           });
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //       });
+  //   }
+  // }, [goalRef, kkachiRef]);
 
-  useEffect(() => {
-    if (imgUrl) {
-      axios
-        .post('http://localhost:8080/users/image', { email, image: imgUrl })
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err));
-    }
-  }, [imgUrl]);
+  // useEffect(() => {
+  //   if (imgUrl) {
+  //     axios
+  //       .post(import.meta.env.VITE_SERVER_IMAGE_URL, { email, image: imgUrl })
+  //       .then((res) => console.log(res))
+  //       .catch((err) => console.log(err));
+  //   }
+  // }, [imgUrl]);
 
   const handleCardFlip = () => setFlip((prev) => !prev);
 
@@ -166,39 +168,55 @@ const ResultContainer = styled.div`
         top: 0;
         width: 100%;
         height: 100%;
-        padding: 56px 40px 30px 40px;
+        padding: 56px 40px 54px 40px;
         border: 1px solid ${({ theme }) => theme.colors.border};
         background-color: #fff;
         backface-visibility: hidden;
 
-        @media screen and (min-width: 315px) and (max-width: 370px) {
+        @media screen and (min-width: 300px) and (max-width: 350px) {
           padding: 44.8px 32px 24px 32px;
         }
-        @media screen and (max-width: 315px) {
-          padding: 28px 20px 15px 20px;
+        @media screen and (max-width: 300px) {
+          padding: 33.6px 24px 32.4px 24px;
         }
 
         .title {
           margin-bottom: 28px;
           text-align: center;
 
-          @media screen and (min-width: 315px) and (max-width: 370px) {
-            margin-bottom: 22.4px;
+          @media screen and (min-width: 305px) and (max-width: 315px) {
+            margin-bottom: 20px;
+            font-size: 12px;
+            line-height: 18px;
           }
-          @media screen and (max-width: 315px) {
+          @media screen and (max-width: 305px) {
             margin-bottom: 14px;
+            font-size: 12px;
+            line-height: 18px;
           }
         }
 
         ${Goal} {
-          padding: 20px 0;
+          padding: 16px 0;
 
-          @media screen and (min-width: 300px) and (max-width: 370px) {
-            padding: 16px 0;
+          @media screen and (min-width: 335px) and (max-width: 365px) {
+            padding: 13px 0;
           }
-          @media screen and (max-width: 300px) {
+          @media screen and (min-width: 290px) and (max-width: 335px) {
+            padding: 11px 0;
+          }
+          @media screen and (min-width: 291px) and (max-width: 325px) {
+            font-size: 11px;
+            line-height: 17px;
+          }
+          @media screen and (max-width: 290px) {
             padding: 10px 0;
             font-size: 10px;
+            line-height: 16px;
+          }
+
+          &:first-child {
+            padding-top: 0;
           }
 
           &:last-child {
