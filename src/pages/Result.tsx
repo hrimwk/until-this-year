@@ -1,12 +1,12 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toPng } from 'html-to-image';
 import styled from 'styled-components';
 
 import Share from '../components/result/Share';
-import htmlToPng from '../assets/utils/result/htmlToPng';
-import { frontCardUrl, backCardUrl, getAssetUrl } from '../../src/assets/utils/result/assetsUrl';
+import { htmlToJpeg, saveKkachiImg } from '../assets/utils/result/saveImg';
+import getAssetUrl from '../assets/utils/result/getAssetsUrl';
 import { getFortuneColor, KkachiColorProps } from '../assets/utils/write/getFortuneColor';
 
 import love_f from '../assets/images/result/love_front.jpeg';
@@ -38,15 +38,13 @@ function Result({ name, email, goalList }: ResultProps) {
   const BLIST = [love_b, money_b, relationship_b, ego_b, health_b];
 
   const goalRef = useRef<HTMLDivElement>(null);
-  const kkachiRef = useRef<HTMLDivElement>(null);
   const navigator = useNavigate();
-  const [imgUrl, setImgUrl] = useState<string>();
   const [flip, setFlip] = useState(false);
   const fortune = sessionStorage.getItem('fortune-type');
 
   const downloadImg = () => {
-    if (goalRef.current === null || kkachiRef.current === null) return;
-    flip ? htmlToPng(goalRef) : htmlToPng(kkachiRef);
+    if (goalRef.current === null) return;
+    flip ? htmlToJpeg(goalRef) : saveKkachiImg(FLIST[getAssetUrl(fortune || '')].url);
   };
 
   const goMain = () => {
@@ -54,44 +52,14 @@ function Result({ name, email, goalList }: ResultProps) {
     location.reload();
   };
 
-  useEffect(() => {
-    if (goalRef.current === null) return;
-    if (!imgUrl) {
-      toPng(goalRef.current, { cacheBust: true })
-        .then((dataUrl) => {
-          const formData = new FormData();
-          formData.append('file', dataUrl);
-          formData.append('upload_preset', import.meta.env.VITE_CLOUDINARY_PRESET);
-          formData.append('folder', 'kkachi');
-          fetch(import.meta.env.VITE_CLOUDINARY_URL, {
-            method: 'POST',
-            body: formData,
-          })
-            .then((res) => res.json())
-            .then((res) => {
-              setImgUrl(res.url);
-            });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  }, [goalRef, kkachiRef]);
-
-  useEffect(() => {
-    if (imgUrl) {
-      axios
-        .post(import.meta.env.VITE_SERVER_IMAGE_URL, { email, image: imgUrl })
-        .then()
-        .catch((err) => console.log(err));
-    }
-  }, [imgUrl]);
-
   const handleCardFlip = () => setFlip((prev) => !prev);
 
   return (
     <ResultContainer className='container'>
       <p className='sub-title-1 c-gy-500 desc'>카드를 눌러서 뒤집어 보세요! </p>
+      <p className='c-gy-500 body-txt-2 info'>
+        (※ 이미지 저장 시, <span className='sub-title-2'>보고있는 화면</span>으로 저장됩니다.)
+      </p>
       <section className='goal-container'>
         <FilpContainer className='ratio-container' onClick={handleCardFlip} $flip={flip}>
           <GoalCard className='absolute-container' ref={goalRef} $imgUrl={BLIST[getAssetUrl(fortune || '')]}>
@@ -104,7 +72,7 @@ function Result({ name, email, goalList }: ResultProps) {
               ))}
             </ul>
           </GoalCard>
-          <div className='illust-container' ref={kkachiRef}>
+          <div className='illust-container'>
             <img
               src={FLIST[getAssetUrl(fortune || '')].url}
               alt={FLIST[getAssetUrl(fortune || '')].alt}
@@ -117,9 +85,8 @@ function Result({ name, email, goalList }: ResultProps) {
         <div className='btn-box'>
           <Share downloadImg={downloadImg} />
         </div>
-        <p className='body-txt-2 c-gy-500'>
-          이메일은 <b className='sub-title-2'>2023년 6월 30일</b>에 보내드려요
-        </p>
+        <p className='c-bk body-txt-2 instagram'>@this_year_kkachi</p>
+        <p className='body-txt-2 c-gy-500'>(※ Safari를 이용하신다면 카드를 충분히 뒤집어 보신 뒤 저장해 주세요!)</p>
         <p className='body-txt-2 c-gy-500'>버그제보/문의 10004team@gmail.com</p>
       </section>
       <p className='btn-txt-12 c-bk link' onClick={goMain}>
@@ -138,7 +105,7 @@ const FilpContainer = styled.div`
 `;
 
 const Goal = styled.li<KkachiColorProps>`
-  border-bottom: 1px solid ${({ theme, $fortuneColor }) => theme.colors[$fortuneColor]};
+  border-bottom: 2px solid ${({ theme, $fortuneColor }) => theme.colors[$fortuneColor]};
 `;
 
 const ResultContainer = styled.div`
@@ -149,6 +116,9 @@ const ResultContainer = styled.div`
   width: 100%;
 
   .desc {
+    margin-bottom: 2px;
+  }
+  .info {
     margin-bottom: 8px;
   }
 
@@ -264,8 +234,12 @@ const ResultContainer = styled.div`
     }
 
     .btn-box {
-      margin-bottom: 16px;
+      margin-bottom: 8px;
     }
+  }
+
+  .instagram {
+    margin-bottom: 6px;
   }
 
   .link {
