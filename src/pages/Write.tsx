@@ -6,7 +6,7 @@ import ArrowBack from '../components/common/ArrowBack';
 import WriteSwiper from '../components/write/WriteSwiper';
 
 import { getFortuneColor, KkachiColorProps } from '../assets/utils/write/getFortuneColor';
-import { getAssetUrl } from '../assets/utils/result/assetsUrl';
+import getAssetUrl from '../assets/utils/result/getAssetsUrl';
 import love from '../assets/images/write/love_profile.jpeg';
 import money from '../assets/images/write/money_profile.jpeg';
 import relationship from '../assets/images/write/relationship_profile.jpeg';

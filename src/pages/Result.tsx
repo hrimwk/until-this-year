@@ -5,8 +5,8 @@ import { toPng } from 'html-to-image';
 import styled from 'styled-components';
 
 import Share from '../components/result/Share';
-import htmlToPng from '../assets/utils/result/htmlToPng';
-import { frontCardUrl, backCardUrl, getAssetUrl } from '../../src/assets/utils/result/assetsUrl';
+import { htmlToPng, saveKkachiImg } from '../assets/utils/result/saveImg';
+import getAssetUrl from '../assets/utils/result/getAssetsUrl';
 import { getFortuneColor, KkachiColorProps } from '../assets/utils/write/getFortuneColor';
 
 import love_f from '../assets/images/result/love_front.jpeg';
@@ -45,8 +45,8 @@ function Result({ name, email, goalList }: ResultProps) {
   const fortune = sessionStorage.getItem('fortune-type');
 
   const downloadImg = () => {
-    if (goalRef.current === null || kkachiRef.current === null) return;
-    flip ? htmlToPng(goalRef) : htmlToPng(kkachiRef);
+    if (goalRef.current === null) return;
+    flip ? htmlToPng(goalRef) : saveKkachiImg(FLIST[getAssetUrl(fortune || '')].url);
   };
 
   const goMain = () => {
@@ -76,7 +76,7 @@ function Result({ name, email, goalList }: ResultProps) {
           console.log(err);
         });
     }
-  }, [goalRef, kkachiRef]);
+  }, [goalRef]);
 
   useEffect(() => {
     if (imgUrl) {
@@ -92,6 +92,9 @@ function Result({ name, email, goalList }: ResultProps) {
   return (
     <ResultContainer className='container'>
       <p className='sub-title-1 c-gy-500 desc'>카드를 눌러서 뒤집어 보세요! </p>
+      <p className='c-gy-500 body-txt-2 info'>
+        (※ 이미지 저장 시, <span className='sub-title-2'>보고있는 화면</span>으로 저장됩니다.)
+      </p>
       <section className='goal-container'>
         <FilpContainer className='ratio-container' onClick={handleCardFlip} $flip={flip}>
           <GoalCard className='absolute-container' ref={goalRef} $imgUrl={BLIST[getAssetUrl(fortune || '')]}>
@@ -104,7 +107,7 @@ function Result({ name, email, goalList }: ResultProps) {
               ))}
             </ul>
           </GoalCard>
-          <div className='illust-container' ref={kkachiRef}>
+          <div className='illust-container'>
             <img
               src={FLIST[getAssetUrl(fortune || '')].url}
               alt={FLIST[getAssetUrl(fortune || '')].alt}
@@ -117,6 +120,7 @@ function Result({ name, email, goalList }: ResultProps) {
         <div className='btn-box'>
           <Share downloadImg={downloadImg} />
         </div>
+        <p className='c-bk body-txt-2 instagram'>@this_year_kkachi</p>
         <p className='body-txt-2 c-gy-500'>
           이메일은 <b className='sub-title-2'>2023년 6월 30일</b>에 보내드려요
         </p>
@@ -138,7 +142,7 @@ const FilpContainer = styled.div`
 `;
 
 const Goal = styled.li<KkachiColorProps>`
-  border-bottom: 1px solid ${({ theme, $fortuneColor }) => theme.colors[$fortuneColor]};
+  border-bottom: 2px solid ${({ theme, $fortuneColor }) => theme.colors[$fortuneColor]};
 `;
 
 const ResultContainer = styled.div`
@@ -149,6 +153,9 @@ const ResultContainer = styled.div`
   width: 100%;
 
   .desc {
+    margin-bottom: 2px;
+  }
+  .info {
     margin-bottom: 8px;
   }
 
@@ -264,8 +271,12 @@ const ResultContainer = styled.div`
     }
 
     .btn-box {
-      margin-bottom: 16px;
+      margin-bottom: 8px;
     }
+  }
+
+  .instagram {
+    margin-bottom: 6px;
   }
 
   .link {
