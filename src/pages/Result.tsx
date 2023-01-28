@@ -9,6 +9,18 @@ import htmlToPng from '../assets/utils/result/htmlToPng';
 import { frontCardUrl, backCardUrl, getAssetUrl } from '../../src/assets/utils/result/assetsUrl';
 import { getFortuneColor, KkachiColorProps } from '../assets/utils/write/getFortuneColor';
 
+import love_f from '../assets/images/result/love_front.jpeg';
+import money_f from '../assets/images/result/money_front.jpeg';
+import relationship_f from '../assets/images/result/relationship_front.jpeg';
+import ego_f from '../assets/images/result/ego_front.jpeg';
+import health_f from '../assets/images/result/health_front.jpeg';
+
+import love_b from '../assets/images/result/love_back.jpeg';
+import money_b from '../assets/images/result/money_back.jpeg';
+import relationship_b from '../assets/images/result/relationship_back.jpeg';
+import ego_b from '../assets/images/result/ego_back.jpeg';
+import health_b from '../assets/images/result/health_back.jpeg';
+
 interface ResultProps {
   name: string;
   email: string;
@@ -16,6 +28,15 @@ interface ResultProps {
 }
 
 function Result({ name, email, goalList }: ResultProps) {
+  const FLIST = [
+    { alt: 'love', url: love_f },
+    { alt: 'money', url: money_f },
+    { alt: 'relationship', url: relationship_f },
+    { alt: 'ego', url: ego_f },
+    { alt: 'health', url: health_f },
+  ];
+  const BLIST = [love_b, money_b, relationship_b, ego_b, health_b];
+
   const goalRef = useRef<HTMLDivElement>(null);
   const kkachiRef = useRef<HTMLDivElement>(null);
   const navigator = useNavigate();
@@ -73,7 +94,7 @@ function Result({ name, email, goalList }: ResultProps) {
       <p className='sub-title-1 c-gy-500 desc'>카드를 눌러서 뒤집어 보세요! </p>
       <section className='goal-container'>
         <FilpContainer className='ratio-container' onClick={handleCardFlip} $flip={flip}>
-          <GoalCard className='absolute-container' ref={goalRef} $imgUrl={backCardUrl[getAssetUrl(fortune || '')]}>
+          <GoalCard className='absolute-container' ref={goalRef} $imgUrl={BLIST[getAssetUrl(fortune || '')]}>
             <h2 className='sub-title-1-eb c-bk title'>{name}님의 올해 목표</h2>
             <ul>
               {goalList?.map((goal) => (
@@ -85,8 +106,8 @@ function Result({ name, email, goalList }: ResultProps) {
           </GoalCard>
           <div className='illust-container' ref={kkachiRef}>
             <img
-              src={frontCardUrl[getAssetUrl(fortune || '')].url}
-              alt={frontCardUrl[getAssetUrl(fortune || '')].alt}
+              src={FLIST[getAssetUrl(fortune || '')].url}
+              alt={FLIST[getAssetUrl(fortune || '')].alt}
               className='front-card'
             />
           </div>
