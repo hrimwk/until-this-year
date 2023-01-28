@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toPng } from 'html-to-image';
@@ -39,7 +39,6 @@ function Result({ name, email, goalList }: ResultProps) {
 
   const goalRef = useRef<HTMLDivElement>(null);
   const navigator = useNavigate();
-  const [imgUrl, setImgUrl] = useState<string>();
   const [flip, setFlip] = useState(false);
   const fortune = sessionStorage.getItem('fortune-type');
 
@@ -52,39 +51,6 @@ function Result({ name, email, goalList }: ResultProps) {
     navigator('/');
     location.reload();
   };
-
-  useEffect(() => {
-    if (goalRef.current === null) return;
-    if (!imgUrl) {
-      toPng(goalRef.current, { cacheBust: true })
-        .then((dataUrl) => {
-          const formData = new FormData();
-          formData.append('file', dataUrl);
-          formData.append('upload_preset', import.meta.env.VITE_CLOUDINARY_PRESET);
-          formData.append('folder', 'kkachi');
-          fetch(import.meta.env.VITE_CLOUDINARY_URL, {
-            method: 'POST',
-            body: formData,
-          })
-            .then((res) => res.json())
-            .then((res) => {
-              setImgUrl(res.url);
-            });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  }, [goalRef]);
-
-  useEffect(() => {
-    if (imgUrl) {
-      axios
-        .post(import.meta.env.VITE_SERVER_IMAGE_URL, { email, image: imgUrl })
-        .then()
-        .catch((err) => console.log(err));
-    }
-  }, [imgUrl]);
 
   const handleCardFlip = () => setFlip((prev) => !prev);
 
