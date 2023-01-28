@@ -31,11 +31,12 @@ function Intro() {
           올해 가장 받고 싶은 복을 선택하면 까치가 찾아올 거예요.
           <br /> 복을 물어 올 까치와 함께 신년 목표를 세워보세요.
         </p>
-        <p className='body-txt-1 c-gy-900'>
+        <p className='body-txt-1 c-gy-900 mb-12'>
           바쁘게 살다 보면 목표를 잊을 때도 있지만,
           <br />
           걱정 마세요. 까치가 6개월 뒤에 메일로 다시 알려드려요!
         </p>
+        <p className='body-txt-1 c-gy-500'>새로고침 시 데이터가 저장되지 않습니다.</p>
       </section>
       <section className='button-area'>
         <button className='btn-txt-eb' onClick={clickButton}>
