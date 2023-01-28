@@ -4,9 +4,16 @@ import axios from 'axios';
 import styled from 'styled-components';
 import ArrowBack from '../components/common/ArrowBack';
 import WriteSwiper from '../components/write/WriteSwiper';
-import { profileUrl } from '../assets/utils/write/assetsUrl';
+
 import { getFortuneColor, KkachiColorProps } from '../assets/utils/write/getFortuneColor';
 import { getAssetUrl } from '../assets/utils/result/assetsUrl';
+import love from '../assets/images/write/love_profile.jpeg';
+import money from '../assets/images/write/money_profile.jpeg';
+import relationship from '../assets/images/write/relationship_profile.jpeg';
+import ego from '../assets/images/write/ego_profile.jpeg';
+import health from '../assets/images/write/health_profile.jpeg';
+import plus from '../assets/images/plus.svg';
+import deletex from '../assets/images/input_delete.png';
 
 type goalList = { id: number; content: string; focus: boolean }[];
 
@@ -19,6 +26,7 @@ interface WriteProps {
 }
 
 function Write({ name, email, goalList, setGoalList, consentCheck }: WriteProps) {
+  const FORTUNELIST = [love, money, relationship, ego, health];
   const [unqId, setUnqId] = useState(2);
   const navigator = useNavigate();
   const fortune = sessionStorage.getItem('fortune-type');
@@ -82,7 +90,7 @@ function Write({ name, email, goalList, setGoalList, consentCheck }: WriteProps)
       <div className='wrap-container'>
         <section className='kkachi-container'>
           <h1 className='title-2 title'>까치와 올해 목표를 적어봐요</h1>
-          <KkachiFace className='kkachi-face' $imgUrl={profileUrl[getAssetUrl(fortune || '')]} />
+          <KkachiFace className='kkachi-face' $imgUrl={FORTUNELIST[getAssetUrl(fortune || '')]} />
           <KkachiTalk $fortuneColor={getFortuneColor(fortune)}>
             <h5 className='sub-title-2'>까치의 한마디</h5>
             <WriteSwiper />
@@ -248,7 +256,7 @@ const WriteContainer = styled.div`
           width: 11px;
           height: 11px;
           margin-left: 19px;
-          background: center/130% no-repeat url('../src/assets/images/input_delete.png');
+          background: center/130% no-repeat url(${deletex});
           cursor: pointer;
         }
       }
@@ -273,7 +281,7 @@ const WriteContainer = styled.div`
           display: inline-block;
           width: 14px;
           height: 14px;
-          background: no-repeat url('../src/assets/images/plus.svg');
+          background: no-repeat url(${plus});
         }
       }
     }

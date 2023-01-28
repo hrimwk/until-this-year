@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import ArrowBack from '../components/common/ArrowBack';
 import UserModal from '../components/user/UserModal';
+import check from '../assets/images/check.png';
 
 interface UserAuthProps {
   name: string;
@@ -219,7 +220,7 @@ const UserAuthtContainer = styled.div`
               display: inline-block;
               width: inherit;
               height: inherit;
-              background: center/70% no-repeat url('../src/assets/images/check.png');
+              background: center/70% no-repeat url(${check});
             }
           }
 
