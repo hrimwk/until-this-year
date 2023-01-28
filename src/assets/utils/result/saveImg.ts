@@ -1,11 +1,11 @@
-import { toPng } from 'html-to-image';
+import { toJpeg } from 'html-to-image';
 
-export const htmlToPng = (ref: React.RefObject<HTMLDivElement>) => {
+export const htmlToJpeg = (ref: React.RefObject<HTMLDivElement>) => {
   if (ref.current === null) return;
-  toPng(ref.current, { cacheBust: true })
+  toJpeg(ref.current, { cacheBust: true })
     .then((dataUrl) => {
       const link = document.createElement('a');
-      link.download = '올해까치_2023 MYGOALS.png';
+      link.download = '올해까치_2023 MYGOALS';
       link.href = dataUrl;
       link.click();
     })
@@ -17,7 +17,7 @@ export const htmlToPng = (ref: React.RefObject<HTMLDivElement>) => {
 export const saveKkachiImg = (url: string) => {
   if (!url) return;
   const link = document.createElement('a');
-  link.download = '올해까치_kkachi of fortune.png';
+  link.download = '올해까치_kkachi of fortune';
   link.href = url;
   link.click();
 };

@@ -5,7 +5,7 @@ import { toPng } from 'html-to-image';
 import styled from 'styled-components';
 
 import Share from '../components/result/Share';
-import { htmlToPng, saveKkachiImg } from '../assets/utils/result/saveImg';
+import { htmlToJpeg, saveKkachiImg } from '../assets/utils/result/saveImg';
 import getAssetUrl from '../assets/utils/result/getAssetsUrl';
 import { getFortuneColor, KkachiColorProps } from '../assets/utils/write/getFortuneColor';
 
@@ -38,7 +38,6 @@ function Result({ name, email, goalList }: ResultProps) {
   const BLIST = [love_b, money_b, relationship_b, ego_b, health_b];
 
   const goalRef = useRef<HTMLDivElement>(null);
-  const kkachiRef = useRef<HTMLDivElement>(null);
   const navigator = useNavigate();
   const [imgUrl, setImgUrl] = useState<string>();
   const [flip, setFlip] = useState(false);
@@ -46,7 +45,7 @@ function Result({ name, email, goalList }: ResultProps) {
 
   const downloadImg = () => {
     if (goalRef.current === null) return;
-    flip ? htmlToPng(goalRef) : saveKkachiImg(FLIST[getAssetUrl(fortune || '')].url);
+    flip ? htmlToJpeg(goalRef) : saveKkachiImg(FLIST[getAssetUrl(fortune || '')].url);
   };
 
   const goMain = () => {
@@ -121,9 +120,7 @@ function Result({ name, email, goalList }: ResultProps) {
           <Share downloadImg={downloadImg} />
         </div>
         <p className='c-bk body-txt-2 instagram'>@this_year_kkachi</p>
-        <p className='body-txt-2 c-gy-500'>
-          이메일은 <b className='sub-title-2'>2023년 6월 30일</b>에 보내드려요
-        </p>
+        <p className='body-txt-2 c-gy-500'>(※ Safari를 이용하신다면 카드를 충분히 뒤집어 보신 뒤 저장해 주세요!)</p>
         <p className='body-txt-2 c-gy-500'>버그제보/문의 10004team@gmail.com</p>
       </section>
       <p className='btn-txt-12 c-bk link' onClick={goMain}>
