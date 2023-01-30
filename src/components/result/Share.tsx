@@ -15,7 +15,7 @@ declare global {
   }
 }
 function Share({ downloadImg }: { downloadImg: () => void }) {
-  const SITE_URL = 'https://www.thisyearkkachi.site';
+  const SITE_URL = 'https://thisyearkkachi.netlify.app';
   useEffect(() => {
     if (window.Kakao) {
       const kakao = window.Kakao;
@@ -26,7 +26,7 @@ function Share({ downloadImg }: { downloadImg: () => void }) {
   }, []);
   const shareKakao = () => {
     window.Kakao.Share.sendScrap({
-      requestUrl: 'http://172.30.1.20:5173',
+      requestUrl: 'https://thisyearkkachi.netlify.app',
       templateId: 87708,
     });
   };
