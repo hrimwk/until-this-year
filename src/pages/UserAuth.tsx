@@ -29,8 +29,7 @@ function UserAuth({ name, setName, email, setEmail, consentCheck, setConsentChec
   const writeEmail = (e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value);
 
   const validEmail = (email: string) => {
-    const emailFormat =
-      /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+    const emailFormat = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([0-9a-zA-Z]{2,})(\]?)$/;
     return emailFormat.test(email);
   };
 
