@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Splash from '../components/intro/Splash';
-import intro from '../assets/images/intro/intro.jpeg';
 
 function Intro() {
   const [splash, setSplash] = useState(true);
@@ -20,7 +19,10 @@ function Intro() {
       {splash && <Splash />}
       <section className='top-img-area'>
         <h2 className='title-2'>어느새 새로운 해가 찾아왔네요</h2>
-        <img src={intro} alt='설명 이미지' />
+        <img
+          src='https://res.cloudinary.com/dsm9617cz/image/upload/v1675320164/kkachi-admin/wrujszaknt0ckas2e9c9.jpg'
+          alt='설명 이미지'
+        />
       </section>
       <section className='bottom-text-area'>
         <h2 className='title-2'>

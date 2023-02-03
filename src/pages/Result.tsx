@@ -9,18 +9,6 @@ import { htmlToJpeg, saveKkachiImg } from '../assets/utils/result/saveImg';
 import getAssetUrl from '../assets/utils/result/getAssetsUrl';
 import { getFortuneColor, KkachiColorProps } from '../assets/utils/write/getFortuneColor';
 
-import love_f from '../assets/images/result/love_front.jpeg';
-import money_f from '../assets/images/result/money_front.jpeg';
-import relationship_f from '../assets/images/result/relationship_front.jpeg';
-import ego_f from '../assets/images/result/ego_front.jpeg';
-import health_f from '../assets/images/result/health_front.jpeg';
-
-import love_b from '../assets/images/result/love_back.jpeg';
-import money_b from '../assets/images/result/money_back.jpeg';
-import relationship_b from '../assets/images/result/relationship_back.jpeg';
-import ego_b from '../assets/images/result/ego_back.jpeg';
-import health_b from '../assets/images/result/health_back.jpeg';
-
 interface ResultProps {
   name: string;
   email: string;
@@ -29,13 +17,34 @@ interface ResultProps {
 
 function Result({ name, email, goalList }: ResultProps) {
   const FLIST = [
-    { alt: 'love', url: love_f },
-    { alt: 'money', url: money_f },
-    { alt: 'relationship', url: relationship_f },
-    { alt: 'ego', url: ego_f },
-    { alt: 'health', url: health_f },
+    {
+      alt: 'love',
+      url: 'https://res.cloudinary.com/dsm9617cz/image/upload/v1675320353/kkachi-admin/x8ehy8kur4sunabwwfcw.jpg',
+    },
+    {
+      alt: 'money',
+      url: 'https://res.cloudinary.com/dsm9617cz/image/upload/v1675320353/kkachi-admin/jmrasep5ubgegzgicsvg.jpg',
+    },
+    {
+      alt: 'relationship',
+      url: 'https://res.cloudinary.com/dsm9617cz/image/upload/v1675320353/kkachi-admin/vv4oz0ed5vkg8ducsafw.jpg',
+    },
+    {
+      alt: 'ego',
+      url: 'https://res.cloudinary.com/dsm9617cz/image/upload/v1675320353/kkachi-admin/jjh5uugt0rpckr0n9dsy.jpg',
+    },
+    {
+      alt: 'health',
+      url: 'https://res.cloudinary.com/dsm9617cz/image/upload/v1675320353/kkachi-admin/ed6ssirkcy6h7pn5joi7.jpg',
+    },
   ];
-  const BLIST = [love_b, money_b, relationship_b, ego_b, health_b];
+  const BLIST = [
+    'https://res.cloudinary.com/dsm9617cz/image/upload/v1675320294/kkachi-admin/nthcqvm4pyeskiirg0mw.jpg',
+    'https://res.cloudinary.com/dsm9617cz/image/upload/v1675320294/kkachi-admin/lwhtxkmfkhnj7vijacoe.jpg',
+    'https://res.cloudinary.com/dsm9617cz/image/upload/v1675320294/kkachi-admin/oqvga0u7n3ebpxwymedb.jpg',
+    'https://res.cloudinary.com/dsm9617cz/image/upload/v1675320294/kkachi-admin/rlun3vp514h7svevhjtg.jpg',
+    'https://res.cloudinary.com/dsm9617cz/image/upload/v1675320294/kkachi-admin/wsi5deitz0u6qsmme1z5.jpg',
+  ];
 
   const goalRef = useRef<HTMLDivElement>(null);
   const navigator = useNavigate();
