@@ -7,11 +7,6 @@ import WriteSwiper from '../components/write/WriteSwiper';
 
 import { getFortuneColor, KkachiColorProps } from '../assets/utils/write/getFortuneColor';
 import getAssetUrl from '../assets/utils/result/getAssetsUrl';
-import love from '../assets/images/write/love_profile.jpeg';
-import money from '../assets/images/write/money_profile.jpeg';
-import relationship from '../assets/images/write/relationship_profile.jpeg';
-import ego from '../assets/images/write/ego_profile.jpeg';
-import health from '../assets/images/write/health_profile.jpeg';
 import plus from '../assets/images/plus.svg';
 import deletex from '../assets/images/input_delete.png';
 
@@ -26,7 +21,13 @@ interface WriteProps {
 }
 
 function Write({ name, email, goalList, setGoalList, consentCheck }: WriteProps) {
-  const FORTUNELIST = [love, money, relationship, ego, health];
+  const FORTUNELIST = [
+    'https://res.cloudinary.com/dsm9617cz/image/upload/v1675320222/kkachi-admin/pzkntbopxn6mbh6fsczs.jpg',
+    'https://res.cloudinary.com/dsm9617cz/image/upload/v1675320222/kkachi-admin/boxy1kw3jpmfyhnmiqwr.jpg',
+    'https://res.cloudinary.com/dsm9617cz/image/upload/v1675320222/kkachi-admin/dm82hrgricl4e7uu9qbe.jpg',
+    'https://res.cloudinary.com/dsm9617cz/image/upload/v1675320222/kkachi-admin/iwawy4tp0vd38kvx7447.jpg',
+    'https://res.cloudinary.com/dsm9617cz/image/upload/v1675320222/kkachi-admin/srgjempkia4kvmedbc2x.jpg',
+  ];
   const [unqId, setUnqId] = useState(2);
   const navigator = useNavigate();
   const fortune = sessionStorage.getItem('fortune-type');
