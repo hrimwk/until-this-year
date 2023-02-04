@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useState, ChangeEvent, useEffect } from 'react';
+import { useState, ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
@@ -31,6 +31,7 @@ function UserAuth() {
   };
 
   const handleChecked = () => setConsentCheck((prev) => !prev);
+
   const handleGoNextStep = () => {
     axios.get('../../db.json').then((res) => {
       if (res.data.users.filter((user: { email: string }) => user.email === email).length > 0) {
