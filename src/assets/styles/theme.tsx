@@ -1,7 +1,7 @@
 import { DefaultTheme } from 'styled-components';
 
 const colors = {
-  p_dark: '#1B395F',
+  p_dark: '#1B365F',
   p_mid: '#79A8D6',
   p_light: '#C5D7E5',
 

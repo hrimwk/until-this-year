@@ -33,26 +33,29 @@ const GlobalStyle = createGlobalStyle`
         display: none;
     }
     button{
-        display: flex;
         cursor: pointer;
         outline: none;
         border-radius: 3px;
+        text-align: center;
     }
     img{
         width:100%;
     }
     input{
-        display: flex;
         padding-left: 10px;
         border:1px solid #EEEEEE;
         border-radius: 4px;
         outline: none;
     }
+    input::placeholder,
+    textarea::placeholder {
+      color:#9E9E9E;
+    }
     .container{
         margin: 0 auto;
         padding: 24px 20px;
         min-height: 100vh;
-        max-width: 540px; 
+        max-width: 430px; 
 
     }
     .c-bk{
@@ -70,6 +73,9 @@ const GlobalStyle = createGlobalStyle`
     .c-gy-500{
         color:#9E9E9E;
     }
+    .c-error-red{
+        color:#FF1C1C;
+    }
     .title-1{
         font-family: 'SANJUGotgam';
         font-size: 24px;
@@ -79,6 +85,11 @@ const GlobalStyle = createGlobalStyle`
         font-family: 'SANJUGotgam';
         font-size: 18px;
         line-height: 28px;
+    }
+    .title-3{
+        font-family: 'SANJUGotgam';
+        font-size: 16px;
+        line-height: 24px;
     }
     .sub-title-1-eb{
         font-family: 'NanumSquareNeo-Variable';
@@ -94,7 +105,7 @@ const GlobalStyle = createGlobalStyle`
     .sub-title-2{
         font-family: 'NanumSquareNeo-Variable';
         font-weight: 800;
-        font-size: 10x;
+        font-size: 10px;
         line-height: 16px;
     }
     .body-txt-1{
@@ -106,6 +117,25 @@ const GlobalStyle = createGlobalStyle`
         font-family: 'NanumSquareNeo-Variable';
         font-size: 10px;
         line-height: 16px;
+    }
+    .btn-txt-eb{
+        font-family: 'NanumSquareNeo-Variable';
+        font-weight: 800;
+        font-size: 16px;
+        line-height: 24px;
+
+    }
+    .btn-txt-16{
+        font-family: 'NanumSquareNeo-Variable';
+        font-size: 16px;
+        line-height: 24px;
+    }
+    .btn-txt-12{
+        font-family: 'NanumSquareNeo-Variable';
+        font-size: 12px;
+        line-height: 18px;
+        text-decoration: underline;
+
     }
 `;
 

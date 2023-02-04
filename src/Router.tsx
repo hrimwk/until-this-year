@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyle from './assets/styles/GlobalStyle';
 import theme from './assets/styles/theme';
@@ -8,19 +9,22 @@ import UserAuth from './pages/UserAuth';
 import FortuneList from './pages/FortuneList';
 import Write from './pages/Write';
 import Result from './pages/Result';
+import { emailState } from '../atom';
 
 function App() {
+  const email = useRecoilValue(emailState);
   return (
     <BrowserRouter>
       <GlobalStyle />
-      <ThemeProvider theme={theme}></ThemeProvider>
-      <Routes>
-        <Route path="/" element={<Intro />}></Route>
-        <Route path="/user" element={<UserAuth />}></Route>
-        <Route path="/fortune" element={<FortuneList />}></Route>
-        <Route path="/write" element={<Write />}></Route>
-        <Route path="/result" element={<Result />}></Route>
-      </Routes>
+      <ThemeProvider theme={theme}>
+        <Routes>
+          <Route path='/' element={<Intro />} />
+          <Route path='/user' element={<UserAuth />} />
+          <Route path='/fortune' element={email ? <FortuneList /> : <Navigate to='/' />} />
+          <Route path='/write' element={email ? <Write /> : <Navigate to='/' />} />
+          <Route path='/result' element={email ? <Result /> : <Navigate to='/' />} />
+        </Routes>
+      </ThemeProvider>
     </BrowserRouter>
   );
 }
