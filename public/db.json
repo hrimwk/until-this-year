@@ -1,0 +1,13 @@
+{
+  "users": [
+    {
+      "email": "test@email.com"
+    },
+    {
+      "email": "test2@email.com"
+    },
+    {
+      "email": "this.year.kkacchi@email.com"
+    }
+  ]
+}
