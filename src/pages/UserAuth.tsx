@@ -1,21 +1,18 @@
 import axios from 'axios';
 import { useState, ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
+
 import ArrowBack from '../components/common/ArrowBack';
 import UserModal from '../components/user/UserModal';
 import check from '../assets/images/check.png';
+import { emailState, nameState, consentCheckState } from '../../atom';
 
-interface UserAuthProps {
-  name: string;
-  setName: React.Dispatch<React.SetStateAction<string>>;
-  email: string;
-  setEmail: React.Dispatch<React.SetStateAction<string>>;
-  consentCheck: boolean;
-  setConsentCheck: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-function UserAuth({ name, setName, email, setEmail, consentCheck, setConsentCheck }: UserAuthProps) {
+function UserAuth() {
+  const [name, setName] = useRecoilState(nameState);
+  const [email, setEmail] = useRecoilState(emailState);
+  const [consentCheck, setConsentCheck] = useRecoilState(consentCheckState);
   const [modal, setModal] = useState(false);
   const navigator = useNavigate();
 

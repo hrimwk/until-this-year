@@ -1,21 +1,17 @@
 import { useRef, useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { toPng } from 'html-to-image';
+import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
 import Share from '../components/result/Share';
 import { htmlToJpeg, saveKkachiImg } from '../assets/utils/result/saveImg';
 import getAssetUrl from '../assets/utils/result/getAssetsUrl';
 import { getFortuneColor, KkachiColorProps } from '../assets/utils/write/getFortuneColor';
+import { goalListState, nameState } from '../../atom';
 
-interface ResultProps {
-  name: string;
-  email: string;
-  goalList: { id: number; content: string }[];
-}
-
-function Result({ name, email, goalList }: ResultProps) {
+function Result() {
+  const name = useRecoilValue(nameState);
+  const goalList = useRecoilValue(goalListState);
   const FLIST = [
     {
       alt: 'love',

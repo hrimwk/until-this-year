@@ -4,10 +4,12 @@ import ArrowBack from '../components/common/ArrowBack';
 import Modal from '../components/fortuneList/Modal';
 import usePreventLeave from '../assets/utils/result/usePreventLeave';
 import ProgressiveImage from 'react-progressive-graceful-image';
+import { useRecoilState } from 'recoil';
+import { fortuneModalIdState } from '../../atom';
 
 function FotuneList() {
   const [visible, setVisible] = useState(false);
-  const [modalId, setModalId] = useState<string>('');
+  const [modalId, setModalId] = useRecoilState(fortuneModalIdState);
 
   const { enablePrevent, disablePrevent } = usePreventLeave();
 

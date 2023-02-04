@@ -9,18 +9,14 @@ import { getFortuneColor, KkachiColorProps } from '../assets/utils/write/getFort
 import getAssetUrl from '../assets/utils/result/getAssetsUrl';
 import plus from '../assets/images/plus.svg';
 import deletex from '../assets/images/input_delete.png';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { consentCheckState, emailState, nameState, goalListState } from '../../atom';
 
-type goalList = { id: number; content: string; focus: boolean }[];
-
-interface WriteProps {
-  name: string;
-  email: string;
-  goalList: goalList;
-  setGoalList: React.Dispatch<React.SetStateAction<goalList>>;
-  consentCheck: boolean;
-}
-
-function Write({ name, email, goalList, setGoalList, consentCheck }: WriteProps) {
+function Write() {
+  const name = useRecoilValue(nameState);
+  const email = useRecoilValue(emailState);
+  const consentCheck = useRecoilValue(consentCheckState);
+  const [goalList, setGoalList] = useRecoilState(goalListState);
   const FORTUNELIST = [
     'https://res.cloudinary.com/dsm9617cz/image/upload/v1675320222/kkachi-admin/pzkntbopxn6mbh6fsczs.jpg',
     'https://res.cloudinary.com/dsm9617cz/image/upload/v1675320222/kkachi-admin/boxy1kw3jpmfyhnmiqwr.jpg',
