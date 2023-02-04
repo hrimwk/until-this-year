@@ -1,14 +1,10 @@
 import ProgressiveImage from 'react-progressive-graceful-image';
 import styled from 'styled-components';
+import { useRecoilValue } from 'recoil';
+import { fortuneModalIdState } from '../../../atom';
 
-import mock from '../../assets/images/mock.jpg';
-
-type PropsType = {
-  modalId: string | undefined;
-};
-
-function FortuneModal(props: PropsType) {
-  const { modalId } = props;
+function FortuneModal() {
+  const modalId = useRecoilValue(fortuneModalIdState);
 
   const MODAL_INNER = [
     {

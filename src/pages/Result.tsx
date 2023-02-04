@@ -7,7 +7,7 @@ import Share from '../components/result/Share';
 import { htmlToJpeg, saveKkachiImg } from '../assets/utils/result/saveImg';
 import getAssetUrl from '../assets/utils/result/getAssetsUrl';
 import { getFortuneColor, KkachiColorProps } from '../assets/utils/write/getFortuneColor';
-import { goalListState, nameState } from '../../atom';
+import { fortuneModalIdState, goalListState, nameState } from '../../atom';
 
 function Result() {
   const name = useRecoilValue(nameState);
@@ -45,11 +45,11 @@ function Result() {
   const goalRef = useRef<HTMLDivElement>(null);
   const navigator = useNavigate();
   const [flip, setFlip] = useState(false);
-  const fortune = sessionStorage.getItem('fortune-type');
+  const modalId = useRecoilValue(fortuneModalIdState);
 
   const downloadImg = () => {
     if (goalRef.current === null) return;
-    flip ? htmlToJpeg(goalRef) : saveKkachiImg(FLIST[getAssetUrl(fortune || '')].url);
+    flip ? htmlToJpeg(goalRef) : saveKkachiImg(FLIST[getAssetUrl(modalId || '')].url);
   };
 
   const goMain = () => {
@@ -67,11 +67,11 @@ function Result() {
       </p>
       <section className='goal-container'>
         <FilpContainer className='ratio-container' onClick={handleCardFlip} $flip={flip}>
-          <GoalCard className='absolute-container' ref={goalRef} $imgUrl={BLIST[getAssetUrl(fortune || '')]}>
+          <GoalCard className='absolute-container' ref={goalRef} $imgUrl={BLIST[getAssetUrl(modalId || '')]}>
             <h2 className='sub-title-1-eb c-bk title'>{name}님의 올해 목표</h2>
             <ul>
               {goalList?.map((goal) => (
-                <Goal className='body-txt-1 c-gy-900' key={goal.id} $fortuneColor={getFortuneColor(fortune || '')}>
+                <Goal className='body-txt-1 c-gy-900' key={goal.id} $fortuneColor={getFortuneColor(modalId || '')}>
                   {goal.content}
                 </Goal>
               ))}
@@ -79,8 +79,8 @@ function Result() {
           </GoalCard>
           <div className='illust-container'>
             <img
-              src={FLIST[getAssetUrl(fortune || '')].url}
-              alt={FLIST[getAssetUrl(fortune || '')].alt}
+              src={FLIST[getAssetUrl(modalId || '')].url}
+              alt={FLIST[getAssetUrl(modalId || '')].alt}
               className='front-card'
             />
           </div>
