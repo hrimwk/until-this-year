@@ -1,10 +1,13 @@
 import { Pagination, Autoplay } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { useRecoilValue } from 'recoil';
+import { fortuneModalIdState } from '../../../atom';
+
 import 'swiper/css';
 import 'swiper/css/pagination';
 
 const WriteSwiper = () => {
-  const fortune = sessionStorage.getItem('fortune-type');
+  const modalId = useRecoilValue(fortuneModalIdState);
   const sentencesOfKkachi = [
     ['올해는 자신감 넘치는 태도 가지기 어때?', '다른 사람의 매력 포인트 찾아보기 어때?', '주변을 둘러보기 어때?'],
     [
@@ -36,8 +39,8 @@ const WriteSwiper = () => {
     ],
   ];
 
-  const getStrings = (fortune: string | null) => {
-    switch (fortune) {
+  const getStrings = (modalId: string | null) => {
+    switch (modalId) {
       case 'love':
         return 0;
       case 'money':
@@ -61,7 +64,7 @@ const WriteSwiper = () => {
         delay: 3500,
         disableOnInteraction: false,
       }}>
-      {sentencesOfKkachi[getStrings(fortune)].map((strings) => (
+      {sentencesOfKkachi[getStrings(modalId)].map((strings) => (
         <SwiperSlide key={strings}>
           <p className='body-txt-1'>{strings}</p>
         </SwiperSlide>

@@ -7,11 +7,10 @@ import { useNavigate } from 'react-router-dom';
 type propsType = {
   visible: boolean;
   setVisible: (data: boolean) => void;
-  modalId: string;
 };
 
 function Modal(props: propsType) {
-  const { visible, setVisible, modalId } = props;
+  const { visible, setVisible } = props;
   const navigate = useNavigate();
   const node = useRef<HTMLDivElement>(null);
 
@@ -19,7 +18,6 @@ function Modal(props: propsType) {
     setVisible(false);
   };
   const clickButton = () => {
-    sessionStorage.setItem('fortune-type', modalId);
     navigate('/write');
   };
 
@@ -50,7 +48,7 @@ function Modal(props: propsType) {
       <ModalOverlay visible={visible} />
       <ModalWrapper visible={visible}>
         <ModalInner ref={node}>
-          <FortuneModal modalId={modalId} />
+          <FortuneModal />
           <span className='modal-close' onClick={closeModal}>
             <img src={exit} alt='exit' />
           </span>

@@ -10,12 +10,13 @@ import getAssetUrl from '../assets/utils/result/getAssetsUrl';
 import plus from '../assets/images/plus.svg';
 import deletex from '../assets/images/input_delete.png';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { consentCheckState, emailState, nameState, goalListState } from '../../atom';
+import { consentCheckState, emailState, nameState, goalListState, fortuneModalIdState } from '../../atom';
 
 function Write() {
   const name = useRecoilValue(nameState);
   const email = useRecoilValue(emailState);
   const consentCheck = useRecoilValue(consentCheckState);
+  const modalId = useRecoilValue(fortuneModalIdState);
   const [goalList, setGoalList] = useRecoilState(goalListState);
   const FORTUNELIST = [
     'https://res.cloudinary.com/dsm9617cz/image/upload/v1675320222/kkachi-admin/pzkntbopxn6mbh6fsczs.jpg',
@@ -26,7 +27,6 @@ function Write() {
   ];
   const [unqId, setUnqId] = useState(2);
   const navigator = useNavigate();
-  const fortune = sessionStorage.getItem('fortune-type');
 
   const handleAddGoalList = () => {
     if (goalList.length >= 5) return;
@@ -67,7 +67,7 @@ function Write() {
       .post(import.meta.env.VITE_SERVER_REGISTRAION_URL, {
         nickname: name,
         email,
-        fortune_id: fortune,
+        fortune_id: modalId,
         opt_in: consentCheck,
         goals: goalList.filter((goal) => !!goal.content).map((goalObj) => goalObj.content),
       })
@@ -87,8 +87,8 @@ function Write() {
       <div className='wrap-container'>
         <section className='kkachi-container'>
           <h1 className='title-2 title'>까치와 올해 목표를 적어봐요</h1>
-          <KkachiFace className='kkachi-face' $imgUrl={FORTUNELIST[getAssetUrl(fortune || '')]} />
-          <KkachiTalk $fortuneColor={getFortuneColor(fortune)}>
+          <KkachiFace className='kkachi-face' $imgUrl={FORTUNELIST[getAssetUrl(modalId || '')]} />
+          <KkachiTalk $fortuneColor={getFortuneColor(modalId)}>
             <h5 className='sub-title-2'>까치의 한마디</h5>
             <WriteSwiper />
           </KkachiTalk>
