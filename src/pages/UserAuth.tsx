@@ -33,21 +33,13 @@ function UserAuth() {
   const handleChecked = () => setConsentCheck((prev) => !prev);
 
   const handleGoNextStep = () => {
-    axios
-      .post(import.meta.env.VITE_SERVER_EMAIL_CHECK_URL, { email })
-      .then((res) => {
-        if (res.data.message === 'Available') {
-          navigator('/fortune');
-        }
-      })
-      .catch((err) => {
-        if (err.response.status === 409) {
-          setModal(true);
-          return;
-        }
-        alert('에러가 발생했습니다. 잠시 후 다시 시도해주세요.');
-        console.log(err);
-      });
+    axios.get('../../db.json').then((res) => {
+      if (res.data.users.filter((user: { email: string }) => user.email === email).length > 0) {
+        setModal(true);
+      } else {
+        navigator('/fortune');
+      }
+    });
   };
 
   return (
