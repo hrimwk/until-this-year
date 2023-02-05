@@ -16,19 +16,20 @@ declare global {
 }
 function Share({ downloadImg }: { downloadImg: () => void }) {
   const SITE_URL = 'https://thisyearkkachi-demo.netlify.app';
-  useEffect(() => {
-    if (window.Kakao) {
-      const kakao = window.Kakao;
-      if (!kakao.isInitialized()) {
-        kakao.init(import.meta.env.VITE_REACT_APP_KAKAO_KEY);
-      }
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (window.Kakao) {
+  //     const kakao = window.Kakao;
+  //     if (!kakao.isInitialized()) {
+  //       kakao.init(import.meta.env.VITE_REACT_APP_KAKAO_KEY);
+  //     }
+  //   }
+  // }, []);
   const shareKakao = () => {
-    window.Kakao.Share.sendScrap({
-      requestUrl: 'https://thisyearkkachi-demo.netlify.app',
-      templateId: 87708,
-    });
+    // window.Kakao.Share.sendScrap({
+    //   requestUrl: 'https://thisyearkkachi-demo.netlify.app',
+    //   templateId: 87708,
+    // });
+    alert('demo 버전에서는 카카오톡 공유가 불가능합니다.');
   };
 
   return (
