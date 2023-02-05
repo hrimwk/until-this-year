@@ -9,7 +9,7 @@ function FortuneModal() {
   const MODAL_INNER = [
     {
       id: 'love',
-      low: 'https://res.cloudinary.com/dsm9617cz/image/upload/v1675433769/kkachi-admin/qjbchgazbbnwci8bts1m.jpg',
+      low: 'https://res.cloudinary.com/dsm9617cz/image/upload/v1675612157/kkachi-admin/bmzoijfe9v5th60yoyq3.jpg',
       src: 'https://res.cloudinary.com/dsm9617cz/image/upload/v1675434622/kkachi-admin/qtoqobcyfvdwhbawu35e.jpg',
       alt: 'love',
       title: '연애/결혼',
@@ -17,7 +17,7 @@ function FortuneModal() {
     },
     {
       id: 'money',
-      low: 'https://res.cloudinary.com/dsm9617cz/image/upload/v1675433769/kkachi-admin/kuvhoosinofrsrzi2yum.jpg',
+      low: 'https://res.cloudinary.com/dsm9617cz/image/upload/v1675612157/kkachi-admin/qddprp99xezpjzxydlbg.jpg',
       src: 'https://res.cloudinary.com/dsm9617cz/image/upload/v1675434622/kkachi-admin/wmhigwei1lgzrhtes5fj.jpg',
       alt: 'money',
       title: '재물/돈',
@@ -25,7 +25,7 @@ function FortuneModal() {
     },
     {
       id: 'relationship',
-      low: 'https://res.cloudinary.com/dsm9617cz/image/upload/v1675433769/kkachi-admin/aijhbuahcjp1luzypbel.jpg',
+      low: 'https://res.cloudinary.com/dsm9617cz/image/upload/v1675612156/kkachi-admin/buqmb1pfddnpnve4zn6d.jpg',
       src: 'https://res.cloudinary.com/dsm9617cz/image/upload/v1675434622/kkachi-admin/qeu5zrkyapfgcbucjcsw.jpg',
       alt: 'relationship',
       title: '대인관계',
@@ -33,7 +33,7 @@ function FortuneModal() {
     },
     {
       id: 'ego',
-      low: 'https://res.cloudinary.com/dsm9617cz/image/upload/v1675433769/kkachi-admin/btyaqcnqmkvnu8lrdqcd.jpg',
+      low: 'https://res.cloudinary.com/dsm9617cz/image/upload/v1675612156/kkachi-admin/jkb4dkswwcpcndk9ykoz.jpg',
       src: 'https://res.cloudinary.com/dsm9617cz/image/upload/v1675434622/kkachi-admin/ff7erbzpwxe95tlzkz8s.jpg',
       alt: 'ego',
       title: '자아실현',
@@ -41,7 +41,7 @@ function FortuneModal() {
     },
     {
       id: 'health',
-      low: 'https://res.cloudinary.com/dsm9617cz/image/upload/v1675433769/kkachi-admin/aykrhi23e7fjhprhyiqz.jpg',
+      low: 'https://res.cloudinary.com/dsm9617cz/image/upload/v1675612156/kkachi-admin/niatbdudablxxy1rgg3n.jpg',
       src: 'https://res.cloudinary.com/dsm9617cz/image/upload/v1675434622/kkachi-admin/wavdta8peo6ghfoywomo.jpg',
       alt: 'health',
       title: '건강 ',
