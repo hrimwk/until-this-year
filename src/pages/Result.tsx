@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
+import ProgressiveImage from 'react-progressive-graceful-image';
 import styled from 'styled-components';
 
 import Share from '../components/result/Share';
@@ -34,12 +35,26 @@ function Result() {
       url: 'https://res.cloudinary.com/dsm9617cz/image/upload/v1675320353/kkachi-admin/ed6ssirkcy6h7pn5joi7.jpg',
     },
   ];
+  const FLIST_LOW = [
+    'https://res.cloudinary.com/dsm9617cz/image/upload/v1675612156/kkachi-admin/vexj47vx324jzy6mup92.jpg',
+    'https://res.cloudinary.com/dsm9617cz/image/upload/v1675612157/kkachi-admin/kqzfgrx5ismajjm0dmcq.jpg',
+    'https://res.cloudinary.com/dsm9617cz/image/upload/v1675612156/kkachi-admin/e8w9ovadjgei9zcrscbz.jpg',
+    'https://res.cloudinary.com/dsm9617cz/image/upload/v1675612156/kkachi-admin/nexoa00lduobiwdykluo.jpg',
+    'https://res.cloudinary.com/dsm9617cz/image/upload/v1675612155/kkachi-admin/tmuedofljlbwwjoji7ad.jpg',
+  ];
   const BLIST = [
     'https://res.cloudinary.com/dsm9617cz/image/upload/v1675320294/kkachi-admin/nthcqvm4pyeskiirg0mw.jpg',
     'https://res.cloudinary.com/dsm9617cz/image/upload/v1675320294/kkachi-admin/lwhtxkmfkhnj7vijacoe.jpg',
     'https://res.cloudinary.com/dsm9617cz/image/upload/v1675320294/kkachi-admin/oqvga0u7n3ebpxwymedb.jpg',
     'https://res.cloudinary.com/dsm9617cz/image/upload/v1675320294/kkachi-admin/rlun3vp514h7svevhjtg.jpg',
     'https://res.cloudinary.com/dsm9617cz/image/upload/v1675320294/kkachi-admin/wsi5deitz0u6qsmme1z5.jpg',
+  ];
+  const BLIST_LOW = [
+    'https://res.cloudinary.com/dsm9617cz/image/upload/v1675612157/kkachi-admin/juglf0fejdpdbytbfbwg.jpg',
+    'https://res.cloudinary.com/dsm9617cz/image/upload/v1675612157/kkachi-admin/atxbyixmj2xrarpigvnd.jpg',
+    'https://res.cloudinary.com/dsm9617cz/image/upload/v1675612156/kkachi-admin/y17jmhwnij5xsnzd6zov.jpg',
+    'https://res.cloudinary.com/dsm9617cz/image/upload/v1675612156/kkachi-admin/nnc7ztgwjkifjbgvqkov.jpg',
+    'https://res.cloudinary.com/dsm9617cz/image/upload/v1675612156/kkachi-admin/sorlmgye0rfjbssnuf2q.jpg',
   ];
 
   const goalRef = useRef<HTMLDivElement>(null);
@@ -67,22 +82,26 @@ function Result() {
       </p>
       <section className='goal-container'>
         <FilpContainer className='ratio-container' onClick={handleCardFlip} $flip={flip}>
-          <GoalCard className='absolute-container' ref={goalRef} $imgUrl={BLIST[getAssetUrl(modalId || '')]}>
-            <h2 className='sub-title-1-eb c-bk title'>{name}님의 올해 목표</h2>
-            <ul>
-              {goalList?.map((goal) => (
-                <Goal className='body-txt-1 c-gy-900' key={goal.id} $fortuneColor={getFortuneColor(modalId || '')}>
-                  {goal.content}
-                </Goal>
-              ))}
-            </ul>
-          </GoalCard>
+          <ProgressiveImage src={BLIST[getAssetUrl(modalId || '')]} placeholder={BLIST_LOW[getAssetUrl(modalId || '')]}>
+            {(src) => (
+              <GoalCard className='absolute-container' ref={goalRef} $imgUrl={src}>
+                <h2 className='sub-title-1-eb c-bk title'>{name}님의 올해 목표</h2>
+                <ul>
+                  {goalList?.map((goal) => (
+                    <Goal className='body-txt-1 c-gy-900' key={goal.id} $fortuneColor={getFortuneColor(modalId || '')}>
+                      {goal.content}
+                    </Goal>
+                  ))}
+                </ul>
+              </GoalCard>
+            )}
+          </ProgressiveImage>
           <div className='illust-container'>
-            <img
+            <ProgressiveImage
               src={FLIST[getAssetUrl(modalId || '')].url}
-              alt={FLIST[getAssetUrl(modalId || '')].alt}
-              className='front-card'
-            />
+              placeholder={FLIST_LOW[getAssetUrl(modalId || '')]}>
+              {(src) => <img src={src} alt={FLIST[getAssetUrl(modalId || '')].alt} className='front-card' />}
+            </ProgressiveImage>
           </div>
         </FilpContainer>
       </section>

@@ -1,7 +1,10 @@
 import { useState, MouseEvent, ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import axios from 'axios';
 import styled from 'styled-components';
+import ProgressiveImage from 'react-progressive-graceful-image';
+
 import ArrowBack from '../components/common/ArrowBack';
 import WriteSwiper from '../components/write/WriteSwiper';
 
@@ -9,7 +12,6 @@ import { getFortuneColor, KkachiColorProps } from '../assets/utils/write/getFort
 import getAssetUrl from '../assets/utils/result/getAssetsUrl';
 import plus from '../assets/images/plus.svg';
 import deletex from '../assets/images/input_delete.png';
-import { useRecoilState, useRecoilValue } from 'recoil';
 import { consentCheckState, emailState, nameState, goalListState, fortuneModalIdState } from '../../atom';
 
 function Write() {
@@ -24,6 +26,13 @@ function Write() {
     'https://res.cloudinary.com/dsm9617cz/image/upload/v1675320222/kkachi-admin/dm82hrgricl4e7uu9qbe.jpg',
     'https://res.cloudinary.com/dsm9617cz/image/upload/v1675320222/kkachi-admin/iwawy4tp0vd38kvx7447.jpg',
     'https://res.cloudinary.com/dsm9617cz/image/upload/v1675320222/kkachi-admin/srgjempkia4kvmedbc2x.jpg',
+  ];
+  const FORTUNELIST_LOW = [
+    'https://res.cloudinary.com/dsm9617cz/image/upload/v1675612157/kkachi-admin/r0ig1v0pzvcmq4d45nl5.jpg',
+    'https://res.cloudinary.com/dsm9617cz/image/upload/v1675612157/kkachi-admin/ka2qbw1dnubtvkslz6ve.jpg',
+    'https://res.cloudinary.com/dsm9617cz/image/upload/v1675612156/kkachi-admin/te4wtnmazjmuymp2pkhj.jpg',
+    'https://res.cloudinary.com/dsm9617cz/image/upload/v1675612156/kkachi-admin/bwlsmwe7lvwdl8vjt606.jpg',
+    'https://res.cloudinary.com/dsm9617cz/image/upload/v1675612156/kkachi-admin/wxbfbkyevjc3nyvi943r.jpg',
   ];
   const [unqId, setUnqId] = useState(2);
   const navigator = useNavigate();
@@ -88,7 +97,11 @@ function Write() {
       <div className='wrap-container'>
         <section className='kkachi-container'>
           <h1 className='title-2 title'>까치와 올해 목표를 적어봐요</h1>
-          <KkachiFace className='kkachi-face' $imgUrl={FORTUNELIST[getAssetUrl(modalId || '')]} />
+          <ProgressiveImage
+            src={FORTUNELIST[getAssetUrl(modalId || '')]}
+            placeholder={FORTUNELIST_LOW[getAssetUrl(modalId || '')]}>
+            {(src: string) => <KkachiFace className='kkachi-face' $imgUrl={src} />}
+          </ProgressiveImage>
           <KkachiTalk $fortuneColor={getFortuneColor(modalId)}>
             <h5 className='sub-title-2'>까치의 한마디</h5>
             <WriteSwiper />
