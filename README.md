@@ -106,9 +106,9 @@ npm run dev
 - 기존에 작성한 이력이 있는 사용자에게 모달 창으로 데이터 저장에 대해 안내합니다.
 <details>
 <summary>아래의 이메일을 입력하면 모달 확인 가능</summary>
-test@email.com
-test2@email.com
-this.year.kkachi@email.com
+test@email.com <br>
+test2@email.com <br>
+this.year.kkachi@email.com <br>
 </details>
 </summary>
 
