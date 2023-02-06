@@ -17,22 +17,18 @@
 
 ## **배포 주소**
 
-### [🖥️ 올해까치 Demo](https://thisyearkkachi-demo.netlify.app/)
+#### [🖥️ 올해까치 Demo](https://thisyearkkachi-demo.netlify.app/)
 
 <br>
 
 ## **레파지토리 주소**
 
-### [📍 FRONTEND](https://github.com/hrimwk/until-this-year)<br>
-
-### [📍 BACKEND](https://github.com/JJieunn/until-this-year)
+#### [📍 FRONTEND](https://github.com/hrimwk/until-this-year)<br>
+#### [📍 BACKEND](https://github.com/JJieunn/until-this-year)
 
 <br>
 
 ## **팀원 및 협업 방식**
-
-<div style="display:flex;gap:30%;">
-<div>
 <b>팀원</b>
 
 [📕 이혜림 FE](https://github.com/hrimwk) <br>
@@ -40,14 +36,12 @@
 [📗 박지은 BE](https://github.com/JJieunn) <br>
 [📘 유효진 Design](mailto:dbgywls11111@gmail.com)
 
-</div>
-<div>
 <b>협업 방식</b>
 
 [🗂️ 팀 노션](https://www.notion.so/308bcbf7e4c740c6ac224f99e6c81989)
 
-</div>
-</div>
+
+
 <br />
 
 ## **Project Flow**
@@ -58,15 +52,8 @@
 
 ## **사용 기술 및 라이브러리**
 
-<img src="https://img.shields.io/badge/Typescript-3178C6?style=flat&logo=Typescript&logoColor=white" />
-<img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=React&logoColor=white" />
-<img src="https://img.shields.io/badge/styled_components-DB7093?style=flat&logo=styled-components&logoColor=white" />
-<img src="https://img.shields.io/badge/recoil-2962ff?style=flat&&" />
-<img src="https://img.shields.io/badge/Axios-5A29E4?style=flat&logo=Axios&logoColor=white" /><br/>
-<img src="https://img.shields.io/badge/react_share-eeeeee?style=flat&" />
-<img src="https://img.shields.io/badge/react_progressive_graceful_image-eeeeee?style=flat&" />
-<img src="https://img.shields.io/badge/ html_to_image-eeeeee?style=flat&" />
-<img src="https://img.shields.io/badge/swiper-eeeeee?style=flat&" />
+<img src="https://img.shields.io/badge/Typescript-3178C6?style=flat&logo=Typescript&logoColor=white" /> <img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=React&logoColor=white" /> <img src="https://img.shields.io/badge/styled_components-DB7093?style=flat&logo=styled-components&logoColor=white" /> <img src="https://img.shields.io/badge/recoil-2962ff?style=flat&&" /> <img src="https://img.shields.io/badge/Axios-5A29E4?style=flat&logo=Axios&logoColor=white" /><br/>
+<img src="https://img.shields.io/badge/react_share-eeeeee?style=flat&" /> <img src="https://img.shields.io/badge/react_progressive_graceful_image-eeeeee?style=flat&" /> <img src="https://img.shields.io/badge/ html_to_image-eeeeee?style=flat&" /> <img src="https://img.shields.io/badge/swiper-eeeeee?style=flat&" />
 
 <br />
 
