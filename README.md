@@ -52,7 +52,7 @@
 
 ## **Project Flow**
 
-(flow 이미지가 들어갑니다.)
+<img width="1144" alt="flow" src="https://user-images.githubusercontent.com/104122566/216870125-087598f0-eb7f-4840-bef5-fd84521d4710.png">
 
 <br />
 
